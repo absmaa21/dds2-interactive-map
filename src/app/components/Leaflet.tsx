@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import {MapContainer, ImageOverlay, Marker} from 'react-leaflet';
 import L from 'leaflet';

@@ -1,9 +1,10 @@
 'use client'
 
 import Leaflet from "@/app/components/Leaflet";
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 import {MarkerType} from "@/pojos/enums";
 import ToggleButton from "@/app/components/ToggleButton";
+import dynamic from "next/dynamic";
 
 const defaultVisibleMarkers = [
     MarkerType.PAWN_SHOP,
@@ -21,6 +22,13 @@ const defaultVisibleMarkers = [
 ]
 
 export default function Home() {
+    const Map = useMemo(() => dynamic(
+        () => import('../app/components/Leaflet'), {
+            loading: () => <p>Loading...</p>,
+            ssr: false,
+        }
+    ), [])
+
     const [visibleTypes, setVisibleTypes] = useState(defaultVisibleMarkers);
     const toggleType = (type: MarkerType) => {
         setVisibleTypes((prev) =>
@@ -34,8 +42,8 @@ export default function Home() {
 
     return (
         <div style={{display: "flex", flexDirection: 'row'}}>
-            <Leaflet visibleTypes={visibleTypes} itemSearch={itemSearch} />
-            <div style={{width: '30%'}}>
+            <Map visibleTypes={visibleTypes} itemSearch={itemSearch} />
+            <div style={{width: '20%'}}>
                 <input type={"search"} value={itemSearch} onChange={e => setItemSearch(e.target.value)} />
                 <hr/>
                 <ToggleButton text={'Hideouts'} selected={visibleTypes.includes(MarkerType.HIDEOUT)} onClick={() => toggleType(MarkerType.HIDEOUT)}/>
