@@ -9,14 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.13",
+    "leaflet": "^1.9.4",
+    "next": "14.2.4",
     "react": "^18",
+    "react-bootstrap": "^2.10.3",
     "react-dom": "^18",
-    "next": "14.2.4"
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@types/leaflet": "^1.9.12",
     "@types/node": "^20",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "typescript": "^5"
   }
 }

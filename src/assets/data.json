@@ -1,0 +1,411 @@
+{
+  "last-update": 1719601311809,
+  "version": 1,
+  "game-version": "1.0.4",
+  "shops": [
+    {
+      "name": "Shop",
+      "area": "Small Island",
+      "check-possible": false,
+      "location": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "discounts": [
+        0.0,
+        0.1
+      ],
+      "items": [
+        {
+          "name": "Small water bottle",
+          "price": 300,
+          "amount": 500,
+          "unit": "ml",
+          "quantity": [
+            10
+          ]
+        },
+        {
+          "name": "Sausage",
+          "price": 500,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            5
+          ]
+        },
+        {
+          "name": "Beer",
+          "price": 500,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            5
+          ]
+        },
+        {
+          "name": "Cigarette pack",
+          "price": 3750,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            1
+          ]
+        },
+        {
+          "name": "Bus ticket",
+          "price": 20,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            15
+          ]
+        },
+        {
+          "name": "Plastic baggies",
+          "price": 1,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            100
+          ]
+        },
+        {
+          "name": "Plastic bag",
+          "price": 250,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "General Store",
+      "area": "Archipelago",
+      "check-possible": false,
+      "location": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "discounts": [
+        0.0,
+        0.1
+      ],
+      "items": [
+        {
+          "name": "Small water bottle",
+          "price": 300,
+          "amount": 500,
+          "unit": "ml",
+          "quantity": [
+            8
+          ]
+        },
+        {
+          "name": "Sausage",
+          "price": 500,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            20
+          ]
+        },
+        {
+          "name": "Cigarette pack",
+          "price": 3750,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            2
+          ]
+        },
+        {
+          "name": "Bus ticket",
+          "price": 20,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            25
+          ]
+        },
+        {
+          "name": "Plastic baggies",
+          "price": 1,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            500
+          ]
+        },
+        {
+          "name": "Plastic bag",
+          "price": 250,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            5
+          ]
+        },
+        {
+          "name": "Chocolate bar",
+          "price": 300,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            1
+          ]
+        },
+        {
+          "name": "Small backpack",
+          "price": 1500,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            1
+          ]
+        },
+        {
+          "name": "Small flashlight",
+          "price": 3000,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            1
+          ]
+        },
+        {
+          "name": "Fertilizer",
+          "price": 1750,
+          "amount": 1000,
+          "unit": "g",
+          "quantity": [
+            5
+          ]
+        },
+        {
+          "name": "Crowbar",
+          "price": 6000,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            1
+          ]
+        },
+        {
+          "name": "Ethanol",
+          "price": 480,
+          "amount": 200,
+          "unit": "ml",
+          "quantity": [
+            10
+          ]
+        },
+        {
+          "name": "Vinegar",
+          "price": 500,
+          "amount": 500000,
+          "unit": "ml",
+          "quantity": [
+            10
+          ]
+        },
+        {
+          "name": "Keychain",
+          "price": 1500,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            3
+          ]
+        },
+        {
+          "name": "Rolling papers",
+          "price": 10,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            20
+          ]
+        },
+        {
+          "name": "Duct tape",
+          "price": 5,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            100
+          ]
+        },
+        {
+          "name": "Stretch foil",
+          "price": 10,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            80
+          ]
+        },
+        {
+          "name": "Cash large",
+          "price": 1,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            100000
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Botanist",
+      "area": "Archipelago",
+      "check-possible": false,
+      "location": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "discounts": [
+        0.0,
+        0.1,
+        0.15,
+        0.2
+      ],
+      "items": [
+        {
+          "name": "Plastic baggies",
+          "price": 1,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            100,
+            200,
+            300
+          ]
+        },
+        {
+          "name": "Fertilizer",
+          "price": 1750,
+          "amount": 1000,
+          "unit": "g",
+          "quantity": [
+            2,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "Rolling papers",
+          "price": 8,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            40,
+            60,
+            80
+          ]
+        },
+        {
+          "name": "Indica Seed",
+          "price": 3000,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            5,
+            7,
+            12
+          ]
+        },
+        {
+          "name": "Weed Indica",
+          "price": 9000,
+          "amount": 10,
+          "unit": "g",
+          "quantity": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "UV bulb large",
+          "price": 9400,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "name": "Hydroponic elements",
+          "price": 9000,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "name": "Flower pot",
+          "price": 2000,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "name": "Empty glass pipe",
+          "price": 5,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            10,
+            20,
+            30
+          ]
+        },
+        {
+          "name": "Vial",
+          "price": 2,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            10,
+            20,
+            30
+          ]
+        },
+        {
+          "name": "Led bulb small",
+          "price": 3700,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Fan",
+          "price": 2250,
+          "amount": 1,
+          "unit": "item",
+          "quantity": [
+            0,
+            2,
+            3
+          ]
+        }
+      ]
+    }
+  ]
+}

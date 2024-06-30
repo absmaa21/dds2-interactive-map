@@ -1,95 +1,51 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+
+import Leaflet from "@/app/components/Leaflet";
+import React, {useState} from "react";
+import {MarkerType} from "@/pojos/enums";
+import ToggleButton from "@/app/components/ToggleButton";
+
+const defaultVisibleMarkers = [
+    MarkerType.PAWN_SHOP,
+    MarkerType.HIDEOUT,
+    MarkerType.BOAT_DOCK,
+    MarkerType.DEAD_DROP,
+    MarkerType.DEALER_SPOT,
+    MarkerType.EQUIP_SHOP,
+    MarkerType.RESTAURANT,
+    MarkerType.ZONES,
+    MarkerType.SHOP,
+    MarkerType.MEDIC_POINT,
+    MarkerType.BOSS,
+    MarkerType.CLOTH_SHOP,
+]
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    const [visibleTypes, setVisibleTypes] = useState(defaultVisibleMarkers);
+    const toggleType = (type: MarkerType) => {
+        setVisibleTypes((prev) =>
+            prev.includes(type)
+                ? prev.filter((t) => t !== type)
+                : [...prev, type]
+        );
+    };
+
+    const [itemSearch, setItemSearch] = useState('')
+
+    return (
+        <div style={{display: "flex", flexDirection: 'row'}}>
+            <Leaflet visibleTypes={visibleTypes} itemSearch={itemSearch} />
+            <div style={{width: '30%'}}>
+                <input type={"search"} value={itemSearch} onChange={e => setItemSearch(e.target.value)} />
+                <hr/>
+                <ToggleButton text={'Hideouts'} selected={visibleTypes.includes(MarkerType.HIDEOUT)} onClick={() => toggleType(MarkerType.HIDEOUT)}/>
+                <ToggleButton text={'Pawn shops'} selected={visibleTypes.includes(MarkerType.PAWN_SHOP)} onClick={() => toggleType(MarkerType.PAWN_SHOP)}/>
+                <ToggleButton text={'Shops'} selected={visibleTypes.includes(MarkerType.SHOP)} onClick={() => toggleType(MarkerType.SHOP)}/>
+                <ToggleButton text={'Cloth shops'} selected={visibleTypes.includes(MarkerType.CLOTH_SHOP)} onClick={() => toggleType(MarkerType.CLOTH_SHOP)}/>
+                <ToggleButton text={'Furniture shops'} selected={visibleTypes.includes(MarkerType.EQUIP_SHOP)} onClick={() => toggleType(MarkerType.EQUIP_SHOP)}/>
+                <ToggleButton text={'Boat docks'} selected={visibleTypes.includes(MarkerType.BOAT_DOCK)} onClick={() => toggleType(MarkerType.BOAT_DOCK)}/>
+                <ToggleButton text={'Bosses'} selected={visibleTypes.includes(MarkerType.BOSS)} onClick={() => toggleType(MarkerType.BOSS)}/>
+            </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+    );
 }
