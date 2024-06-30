@@ -17,6 +17,7 @@ export enum Area {
     SMALL_ISLAND = 'Small Island',
     ARCHI = 'Archipelago',
     CALLEJON = 'Callejon',
+    FARMERS_ISLAND = "Farmer's Island",
     JUNGLE = 'Jungle',
     SLAVS_BAY = 'Slavs Bay',
     PENINSULAR = 'Paraíso Peninsular',

@@ -173,6 +173,12 @@ function Leaflet(props: Leaflet) {
                     <Marker key={i+700} position={L.latLng(m.location.x, m.location.y)} icon={dealerIcon}/>
                 ))
             }
+
+            {props.visibleTypes.includes(MarkerType.MEDIC_POINT) && props.itemSearch.length <= 0 &&
+                data["medic-points"].map((m, i) => (
+                    <Marker key={i+800} position={L.latLng(m.location.x, m.location.y)} icon={medicIcon}/>
+                ))
+            }
         </MapContainer>
     );
 }
