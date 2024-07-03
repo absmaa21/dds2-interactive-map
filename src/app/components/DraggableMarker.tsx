@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useRef, useState} from "react";
+import {useMemo, useRef, useState} from "react";
 import {Marker, Popup, Rectangle} from "react-leaflet";
 import {Marker as LeafletMarker} from 'leaflet';
 import L from "leaflet";
