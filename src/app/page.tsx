@@ -60,7 +60,7 @@ export default function Home() {
                 <ToggleButton text={'Cloth shops'} selected={visibleTypes.includes(MarkerType.CLOTH_SHOP)}
                               onClick={() => toggleType(MarkerType.CLOTH_SHOP)} amount={data["cloth-shops"].length}/>
                 <ToggleButton text={'Furniture shops'} selected={visibleTypes.includes(MarkerType.EQUIP_SHOP)}
-                              onClick={() => toggleType(MarkerType.EQUIP_SHOP)}/>
+                              onClick={() => toggleType(MarkerType.EQUIP_SHOP)} amount={data["equip-shops"].length}/>
                 <ToggleButton text={'Boat docks'} selected={visibleTypes.includes(MarkerType.BOAT_DOCK)}
                               onClick={() => toggleType(MarkerType.BOAT_DOCK)} amount={data["anchor-spots"].length}/>
                 <ToggleButton text={'Bosses'} selected={visibleTypes.includes(MarkerType.BOSS)}

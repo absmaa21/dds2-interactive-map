@@ -1,4 +1,4 @@
-import {Area, MarkerType, Unit} from "@/pojos/enums";
+import {Area, Unit} from "@/pojos/enums";
 
 interface Marker {
     "name": string,
@@ -25,7 +25,9 @@ export interface Data {
 export interface Shop extends Marker {
     "check-possible": boolean,
     "discounts": number[],
-    "items": Item[],
+    "items"?: Item[],
+    "furnitures"?: Furniture[],
+    "equipments"?: Equipment[],
 }
 
 export interface Item {
@@ -57,6 +59,23 @@ export interface MedicPoint extends Marker {
 export interface DrugDemand {
     "name": string,
     "price-per-g": number,
+}
+
+export interface Furniture extends Item {
+    visibility?: number,
+    security?: number,
+    comfort?: number,
+    "blocks-grenades"?: boolean,
+    "substance-storage"?: number,
+    "hideout-stash"?: number,
+}
+
+export interface Equipment extends Furniture {
+    tier: number,
+    "crafting-speed"?: number,
+    "waste-amount"?: number,
+    "production-cost"?: number,
+    "energy-usage"?: number,
 }
 
 const data: Data
@@ -257,6 +276,126 @@ const data: Data
             "phoneline": false,
             "garden": false,
         },
+        {
+            "name": "House",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.410954, y: 0.573868 },
+            "price": 820000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": true,
+            "phoneline": true,
+            "garden": true,
+        },
+        {
+            "name": "Cottage",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.470004, y: 0.576278 },
+            "price": 350000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": false,
+            "phoneline": false,
+            "garden": false,
+        },
+        {
+            "name": "Cottage",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.432239, y: 0.594472 },
+            "price": 370000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": false,
+            "phoneline": false,
+            "garden": false,
+        },
+        {
+            "name": "Apartment",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.424858, y: 0.554474 },
+            "price": 485000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": true,
+            "phoneline": true,
+            "garden": false,
+        },
+        {
+            "name": "House",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.42503, y: 0.626583 },
+            "price": 650000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": false,
+            "phoneline": false,
+            "garden": false,
+        },
+        {
+            "name": "House",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.283583, y: 0.553784 },
+            "price": 535000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": false,
+            "phoneline": false,
+            "garden": true,
+        },
+        {
+            "name": "Apartment",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.261783, y: 0.62348 },
+            "price": 750000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": true,
+            "phoneline": true,
+            "garden": false,
+        },
+        {
+            "name": "Apartment",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.297659, y: 0.603898 },
+            "price": 620000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": true,
+            "phoneline": true,
+            "garden": false,
+        },
+        {
+            "name": "House",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.257491, y: 0.666732 },
+            "price": 480000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": false,
+            "phoneline": false,
+            "garden": false,
+        },
+        {
+            "name": "Warehouse",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.325983, y: 0.636689 },
+            "price": 1150000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "running-water": true,
+            "phoneline": false,
+            "garden": true,
+        },
     ],
     "shops": [
         {
@@ -328,11 +467,7 @@ const data: Data
                 "x": 0.477041,
                 "y": 0.914439
             },
-            "discounts": [
-                0.0,
-                0.1,
-                0.2
-            ],
+            "discounts": [0.0, 0.1, 0.2],
             "items": [
                 {
                     "name": "Small water bottle",
@@ -360,18 +495,14 @@ const data: Data
                     "price": 3750,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        2
-                    ]
+                    "quantity": [2]
                 },
                 {
                     "name": "Bus ticket",
                     "price": 20,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        25
-                    ]
+                    "quantity": [25]
                 },
                 {
                     "name": "Plastic baggies",
@@ -406,90 +537,70 @@ const data: Data
                     "price": 3000,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        1
-                    ]
+                    "quantity": [1]
                 },
                 {
                     "name": "Fertilizer",
                     "price": 1750,
                     "amount": 1000,
                     "unit": Unit.MASS,
-                    "quantity": [
-                        5
-                    ]
+                    "quantity": [5]
                 },
                 {
                     "name": "Crowbar",
                     "price": 6000,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        1
-                    ]
+                    "quantity": [1]
                 },
                 {
                     "name": "Ethanol",
                     "price": 480,
                     "amount": 200,
                     "unit": Unit.LIQUID,
-                    "quantity": [
-                        10
-                    ]
+                    "quantity": [10]
                 },
                 {
                     "name": "Vinegar",
                     "price": 500,
                     "amount": 500000,
                     "unit": Unit.LIQUID,
-                    "quantity": [
-                        10
-                    ]
+                    "quantity": [10]
                 },
                 {
                     "name": "Keychain",
                     "price": 1500,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        3
-                    ]
+                    "quantity": [3]
                 },
                 {
                     "name": "Rolling papers",
                     "price": 10,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        20
-                    ]
+                    "quantity": [20]
                 },
                 {
                     "name": "Duct tape",
                     "price": 5,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        100
-                    ]
+                    "quantity": [100]
                 },
                 {
                     "name": "Stretch foil",
                     "price": 10,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        80
-                    ]
+                    "quantity": [80]
                 },
                 {
                     "name": "Cash large",
                     "price": 1,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        100000
-                    ]
+                    "quantity": [100000]
                 }
             ]
         },
@@ -497,148 +608,92 @@ const data: Data
             "name": "Botanist",
             "area": Area.ARCHI,
             "check-possible": false,
-            "location": {
-                "x": 0.550338,
-                "y": 0.942071
-            },
-            "discounts": [
-                0.0,
-                0.1,
-                0.15,
-                0.2
-            ],
+            "location": {"x": 0.550338, "y": 0.942071},
+            "discounts": [0.0, 0.1, 0.15, 0.2],
             "items": [
                 {
                     "name": "Plastic baggies",
                     "price": 1,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        100,
-                        200,
-                        300
-                    ]
+                    "quantity": [100, 200, 300]
                 },
                 {
                     "name": "Fertilizer",
                     "price": 1750,
                     "amount": 1000,
                     "unit": Unit.MASS,
-                    "quantity": [
-                        2,
-                        2,
-                        3
-                    ]
+                    "quantity": [2, 2, 3]
                 },
                 {
                     "name": "Rolling papers",
                     "price": 8,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        40,
-                        60,
-                        80
-                    ]
+                    "quantity": [40, 60, 80]
                 },
                 {
                     "name": "Indica Seed",
                     "price": 3000,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        5,
-                        7,
-                        12
-                    ]
+                    "quantity": [5, 7, 12]
                 },
                 {
                     "name": "Weed Indica",
                     "price": 9000,
                     "amount": 10,
                     "unit": Unit.MASS,
-                    "quantity": [
-                        1,
-                        2,
-                        3
-                    ]
+                    "quantity": [1, 2, 3]
                 },
                 {
                     "name": "UV bulb large",
                     "price": 9400,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        1,
-                        2,
-                        2
-                    ]
+                    "quantity": [1, 2, 2]
                 },
                 {
                     "name": "Hydroponic elements",
                     "price": 9000,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        1,
-                        2,
-                        2
-                    ]
+                    "quantity": [1, 2, 2]
                 },
                 {
                     "name": "Flower pot",
                     "price": 2000,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        1,
-                        2,
-                        2
-                    ]
+                    "quantity": [1, 2, 2]
                 },
                 {
                     "name": "Empty glass pipe",
                     "price": 5,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        10,
-                        20,
-                        30
-                    ]
+                    "quantity": [10, 20, 30]
                 },
                 {
                     "name": "Vial",
                     "price": 2,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        10,
-                        20,
-                        30
-                    ]
+                    "quantity": [10, 20, 30]
                 },
                 {
                     "name": "Led bulb small",
                     "price": 3700,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        0,
-                        1,
-                        1
-                    ]
+                    "quantity": [0, 1, 1]
                 },
                 {
                     "name": "Fan",
                     "price": 2250,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [
-                        0,
-                        2,
-                        3
-                    ]
+                    "quantity": [0, 2, 3]
                 }
             ]
         },
@@ -646,11 +701,8 @@ const data: Data
             "name": "Fuel depot",
             "area": Area.ARCHI,
             "check-possible": true,
-            "location": {
-                x: 0.520985,
-                y: 0.879266
-            },
-            "discounts": [0.0, 0.1],
+            "location": {x: 0.520985, y: 0.879266},
+            "discounts": [0.0],
             "items": [
                 {
                     "name": "Bus ticket",
@@ -674,18 +726,46 @@ const data: Data
                     "quantity": [1],
                 },
                 {
-                    "name": "Gasoline 4l",
+                    "name": "Gasoline",
                     "price": 6000,
                     "amount": 4000,
                     "unit": Unit.LIQUID,
                     "quantity": [8],
                 },
                 {
-                    "name": "Gasoline 11l",
+                    "name": "Gasoline",
                     "price": 16500,
                     "amount": 11000,
                     "unit": Unit.LIQUID,
                     "quantity": [2],
+                },
+                {
+                    "name": "Metal parts",
+                    "price": 950,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Electric wires",
+                    "price": 1000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [8],
+                },
+                {
+                    "name": "Simple motorboat",
+                    "price": 129000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Rib motorboat",
+                    "price": 165000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
                 },
             ]
         }, // Finished
@@ -2342,8 +2422,1487 @@ const data: Data
                 },
             ]
         },
+        {
+            "name": "Bogdan the mechanic",
+            "area": Area.SLAVS_BAY,
+            "check-possible": true,
+            "location": {x: 0.327528, y: 0.628621 },
+            "discounts": [0.0, 0.05],
+            "items": [
+                {
+                    "name": "Metal parts",
+                    "price": 950,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [15],
+                },
+                {
+                    "name": "Electric wires",
+                    "price": 1000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [15],
+                },
+                {
+                    "name": "Gasoline",
+                    "price": 6000,
+                    "amount": 4000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Gasoline",
+                    "price": 16500,
+                    "amount": 11000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Small flashlight",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Flashlight",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Crowbar",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Keychain",
+                    "price": 1500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Car",
+                    "price": 300000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+            ]
+        },
+        {
+            "name": "General store",
+            "area": Area.SLAVS_BAY,
+            "check-possible": false,
+            "location": {x: 0.327356, y: 0.619695 },
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": "Small water bottle",
+                    "price": 300,
+                    "amount": 500,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Medium water bottle",
+                    "price": 2300,
+                    "amount": 5000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Cigarette pack",
+                    "price": 3750,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [6],
+                },
+                {
+                    "name": "Tabacco pack",
+                    "price": 4500,
+                    "amount": 50,
+                    "unit": Unit.MASS,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Chocolate bar",
+                    "price": 300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Cacao powder",
+                    "price": 1250,
+                    "amount": 500,
+                    "unit": Unit.MASS,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Packet of sugar",
+                    "price": 1200,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Packet of flour",
+                    "price": 550,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Packet of salt",
+                    "price": 450,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Packet of soda",
+                    "price": 700,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Fertilizer",
+                    "price": 1750,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Ethanol",
+                    "price": 480,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Vinegar",
+                    "price": 500,
+                    "amount": 500000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Keychain",
+                    "price": 1500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                },
+                {
+                    "name": "Small flashlight",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Flashlight",
+                    "price": 4000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Crowbar",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Glasses",
+                    "price": 1100,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Baseball cap",
+                    "price": 300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Bandage",
+                    "price": 8000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                },
+                {
+                    "name": "Map",
+                    "price": 2300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Bus ticket",
+                    "price": 20,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [25],
+                },
+                {
+                    "name": "Rolling papers",
+                    "price": 10,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [40],
+                },
+                {
+                    "name": "Plastic baggies",
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [500],
+                },
+                {
+                    "name": "Duct tape",
+                    "price": 5,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100],
+                },
+                {
+                    "name": "Stretch foil",
+                    "price": 10,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [80],
+                },
+                {
+                    "name": "Plastic bag",
+                    "price": 250,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Cash large",
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100000],
+                },
+            ]
+        },
+        {
+            "name": "Construction store",
+            "area": Area.SLAVS_BAY,
+            "check-possible": false,
+            "location": {x: 0.378339, y: 0.594292 },
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": "Medium water bottle",
+                    "price": 1300,
+                    "amount": 5000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Packet of soda",
+                    "price": 700,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Acetone",
+                    "price": 3000,
+                    "amount": 1000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Ammonia",
+                    "price": 1750,
+                    "amount": 1000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Methanol",
+                    "price": 1150,
+                    "amount": 300,
+                    "unit": Unit.LIQUID,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Fertilizer",
+                    "price": 1750,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Synthetic Fertilizer",
+                    "price": 1200,
+                    "amount": 3000,
+                    "unit": Unit.MASS,
+                    "quantity": [3],
+                },
+                {
+                    "name": "Wire cutters",
+                    "price": 4500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Small flash light",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Plastic baggies",
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1000],
+                },
+                {
+                    "name": "Duct tape",
+                    "price": 3,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100],
+                },
+                {
+                    "name": "Stretch foil",
+                    "price": 5,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100],
+                },
+                {
+                    "name": "Plastic bag",
+                    "price": 250,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+            ]
+        },
+        {
+            "name": "Old lady",
+            "area": Area.SLAVS_BAY,
+            "check-possible": false,
+            "location": {x: 0.432411, y: 0.638772 },
+            "discounts": [0.0, 0.1, 0.2],
+            "items": [
+                {
+                    "name": "Poppy head young",
+                    "price": 500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [6],
+                },
+                {
+                    "name": "Morning glory",
+                    "price": 800,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Ergot rye",
+                    "price": 1100,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Yew tree branch",
+                    "price": 1300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+            ]
+        },
+        {
+            "name": "Fuel depot",
+            "area": Area.SLAVS_BAY,
+            "check-possible": true,
+            "location": {x: 0.314825, y: 0.548459 },
+            "discounts": [0.0],
+            "items": [
+                {
+                    "name": "Gasoline",
+                    "price": 6000,
+                    "amount": 4000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [12],
+                },
+                {
+                    "name": "Gasoline",
+                    "price": 16500,
+                    "amount": 4,
+                    "unit": Unit.LIQUID,
+                    "quantity": [4],
+                },
+                {
+                    "name": "Small flashlight",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Wire cutters",
+                    "price": 4500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Crowbar",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Metal parts",
+                    "price": 900,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [20],
+                },
+                {
+                    "name": "Electric wires",
+                    "price": 900,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [20],
+                },
+                {
+                    "name": "Map",
+                    "price": 2500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Small Yacht",
+                    "price": 470000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Motorboat",
+                    "price": 315000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+            ]
+        }, // Finished
+        {
+            "name": "Outdoor weed store",
+            "area": Area.SLAVS_BAY,
+            "check-possible": false,
+            "location": {x: 0.376622, y: 0.576782 },
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": "Sativa seed",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Cannabis Sativa",
+                    "price": 12000,
+                    "amount": 10,
+                    "unit": Unit.MASS,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Led bulb small",
+                    "price": 3700,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "UV bulb large",
+                    "price": 9400,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Hydroponic elements",
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Flower pot",
+                    "price": 2000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                },
+                {
+                    "name": "Fan",
+                    "price": 2250,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Empty glass pipe",
+                    "price": 5,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Vial",
+                    "price": 2,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [50],
+                },
+                {
+                    "name": "Rolling papers",
+                    "price": 4,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [40],
+                },
+                {
+                    "name": "Plastic baggies",
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [50],
+                },
+            ]
+        },
+        {
+            "name": "Mini-market",
+            "area": Area.PENINSULAR,
+            "check-possible": true,
+            "location": {x: 0.266246, y: 0.605793 },
+            "discounts": [0.0, 0.05, 0.1],
+            "items": [
+                {
+                    "name": "Small water bottle",
+                    "price": 300,
+                    "amount": 500,
+                    "unit": Unit.LIQUID,
+                    "quantity": [20,25,30],
+                },
+                {
+                    "name": "Medium water bottle",
+                    "price": 1300,
+                    "amount": 5000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10,15,20],
+                },
+                {
+                    "name": "Beer",
+                    "price": 500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10,15,20],
+                },
+                {
+                    "name": "Chocolate bar",
+                    "price": 300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5,10,15],
+                },
+                {
+                    "name": "Packet of sugar",
+                    "price": 1200,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [20,25,30],
+                },
+                {
+                    "name": "Packet of flour",
+                    "price": 550,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [20,25,30],
+                },
+                {
+                    "name": "Packet of salt",
+                    "price": 450,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [20,25,30],
+                },
+                {
+                    "name": "Packet of soda",
+                    "price": 700,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [20,25,30],
+                },
+                {
+                    "name": "Cacao powder",
+                    "price": 1500,
+                    "amount": 500,
+                    "unit": Unit.MASS,
+                    "quantity": [8,12,18],
+                },
+                {
+                    "name": "Poppy seed pack",
+                    "price": 3200,
+                    "amount": 100,
+                    "unit": Unit.MASS,
+                    "quantity": [4,6,8],
+                },
+                {
+                    "name": "Acetone",
+                    "price": 3000,
+                    "amount": 1000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [2,3,5],
+                },
+                {
+                    "name": "Ammonia",
+                    "price": 1700,
+                    "amount": 1000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [1,2,3],
+                },
+                {
+                    "name": "Methanol",
+                    "price": 1150,
+                    "amount": 300,
+                    "unit": Unit.LIQUID,
+                    "quantity": [1,2,3],
+                },
+                {
+                    "name": "Ethanol",
+                    "price": 480,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10,20,30],
+                },
+                {
+                    "name": "Vinegar",
+                    "price": 500,
+                    "amount": 500000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10,20,30],
+                },
+                {
+                    "name": "Cigarette pack",
+                    "price": 3750,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10,15,20],
+                },
+                {
+                    "name": "Tabacco pack",
+                    "price": 4500,
+                    "amount": 50,
+                    "unit": Unit.MASS,
+                    "quantity": [5,10,20],
+                },
+                {
+                    "name": "Fertilizer",
+                    "price": 1200,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [3,6,9],
+                },
+                {
+                    "name": "Fertilizer",
+                    "price": 8750,
+                    "amount": 5000,
+                    "unit": Unit.MASS,
+                    "quantity": [3,6,9],
+                },
+                {
+                    "name": "Synthetic Fertilizer",
+                    "price": 1200,
+                    "amount": 3000,
+                    "unit": Unit.MASS,
+                    "quantity": [3,5,9],
+                },
+                {
+                    "name": "Keychain",
+                    "price": 1500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3,4,5],
+                },
+                {
+                    "name": "Cooking pot",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3,4],
+                },
+                {
+                    "name": "Small flashlight",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,4,6],
+                },
+                {
+                    "name": "Flashlight",
+                    "price": 4000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1,2,3],
+                },
+                {
+                    "name": "Crowbar",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,2,3],
+                },
+                {
+                    "name": "Wire cutters",
+                    "price": 4500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,2,3],
+                },
+                {
+                    "name": "Mobile phone",
+                    "price": 19000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3,4],
+                },
+                {
+                    "name": "Map",
+                    "price": 2300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,4,6],
+                },
+                {
+                    "name": "Glasses",
+                    "price": 1100,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3,5],
+                },
+                {
+                    "name": "Baseball cap",
+                    "price": 300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,4,5],
+                },
+                {
+                    "name": "T-shirt",
+                    "price": 450,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3,5],
+                },
+                {
+                    "name": "Pants",
+                    "price": 1500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1,2,5],
+                },
+                {
+                    "name": "Small backpack",
+                    "price": 1800,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3,5,7],
+                },
+                {
+                    "name": "Bandage",
+                    "price": 8000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5,10,15],
+                },
+                {
+                    "name": "Rolling papers",
+                    "price": 10,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100,150,200],
+                },
+                {
+                    "name": "Plastic baggies",
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1000,1500,2000],
+                },
+                {
+                    "name": "Duct tape",
+                    "price": 5,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100,500,1000],
+                },
+                {
+                    "name": "Stretch foil",
+                    "price": 10,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [80,450,950],
+                },
+                {
+                    "name": "Plastic bag",
+                    "price": 250,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [20,20,20],
+                },
+                {
+                    "name": "Bus ticket",
+                    "price": 20,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100,100,100],
+                },
+                {
+                    "name": "Cash large",
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100000,200000,300000],
+                },
+            ]
+        }, // Finished
+        {
+            "name": "Pharmacy",
+            "area": Area.PENINSULAR,
+            "check-possible": false,
+            "location": {x: 0.271911, y: 0.607851 },
+            "discounts": [0.0, 0.1, 0.2],
+            "items": [
+                {
+                    "name": "Bandage",
+                    "price": 8000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10,30],
+                },
+                {
+                    "name": "First aid kit",
+                    "price": 18000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3,8],
+                },
+                {
+                    "name": "Antivenom",
+                    "price": 10000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10,20],
+                },
+                {
+                    "name": "Bottle of cough syrup",
+                    "price": 1500,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10,25],
+                },
+                {
+                    "name": "Migraine medicine",
+                    "price": 2200,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10,25],
+                },
+                {
+                    "name": "Medicare package",
+                    "price": 24000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10,25],
+                },
+                {
+                    "name": "Ephedrine",
+                    "price": 13500,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [5,10],
+                },
+                {
+                    "name": "Ethanol",
+                    "price": 480,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [20,40],
+                },
+                {
+                    "name": "Phenylethylamine",
+                    "price": 2900,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [0,9],
+                },
+                {
+                    "name": "Acetone",
+                    "price": 3000,
+                    "amount": 1000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [0,5],
+                },
+                {
+                    "name": "Acetone",
+                    "price": 13500,
+                    "amount": 5000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [0,1],
+                },
+                {
+                    "name": "Ammonia",
+                    "price": 1750,
+                    "amount": 1000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [0,6],
+                },
+                {
+                    "name": "Ammonia",
+                    "price": 8750,
+                    "amount": 5000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [0,1],
+                },
+                {
+                    "name": "Methanol",
+                    "price": 1150,
+                    "amount": 300,
+                    "unit": Unit.LIQUID,
+                    "quantity": [1,9],
+                },
+                {
+                    "name": "Methanol",
+                    "price": 17000,
+                    "amount": 5000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [0,2],
+                },
+                {
+                    "name": "Empty labled medical vial",
+                    "price": 6,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0,50],
+                },
+                {
+                    "name": "Empty labeled medical box",
+                    "price": 10,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0,15],
+                },
+                {
+                    "name": "Plastic bag",
+                    "price": 250,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5,5],
+                },
+            ]
+        },
     ],
-    "equip-shops": [], // 0.460048, 0.796165
+    "equip-shops": [
+        {
+            "name": "Watto",
+            "area": Area.SLAVS_BAY,
+            "check-possible": false,
+            "location": {x: 0.382802, y: 0.626392 },
+            "discounts": [0.0, 0.1, 0.15],
+            "furnitures": [
+                {
+                    "name": "Small barrel",
+                    "price": 1200,
+                    "amount": 2,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3],
+                    "substance-storage": 10000,
+                },
+                {
+                    "name": "Medium barrel",
+                    "price": 2500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3],
+                    "substance-storage": 20000,
+                    "visibility": 0.5,
+                },
+                {
+                    "name": "Large barrel",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3],
+                    "substance-storage": 50000,
+                    "visibility": 0.5,
+                },
+                {
+                    "name": "Small safe",
+                    "price": 35000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3,3],
+                },
+                {
+                    "name": "Safe",
+                    "price": 250000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1,1],
+                },
+                {
+                    "name": "Window bars",
+                    "price": 4500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5,8],
+                    "visibility": 0.5,
+                    "security": 2,
+                },
+                {
+                    "name": "Window shutters",
+                    "price": 4200,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [4,7],
+                    "visibility": -2,
+                    "security": 1,
+                    "blocks-grenades": true,
+                },
+                {
+                    "name": "Door lock",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3,5],
+                    "security": 7,
+                },
+                {
+                    "name": "Large door lock",
+                    "price": 8900,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3],
+                    "security": 15,
+                },
+            ],
+            "equipments": [
+                {
+                    "name": "Laboratory tray",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,2],
+                    "tier": 1,
+                    "hideout-stash": 1,
+                    "substance-storage": 150,
+                    "visibility": 0.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Coffee grinder",
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0,1],
+                    "tier": 2,
+                    "visibility": 0.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 120,
+                },
+                {
+                    "name": "Electric pressure cooker",
+                    "price": 32500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3],
+                    "tier": 2,
+                    "visibility": 1,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 2000,
+                },
+                {
+                    "name": "Laboratory autoclave",
+                    "price": 65000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1,2],
+                    "tier": 2,
+                    "visibility": 1,
+                    "crafting-speed": 1.25,
+                    "waste-amount": 0.8,
+                    "production-cost": 1,
+                    "energy-usage": 1400,
+                },
+                {
+                    "name": "Laboratory water bath",
+                    "price": 110000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1,1],
+                    "tier": 3,
+                    "visibility": 1.5,
+                    "crafting-speed": 1.5,
+                    "waste-amount": 0.5,
+                    "production-cost": 1,
+                    "energy-usage": 2400,
+                },
+                {
+                    "name": "Laboratory ice bath",
+                    "price": 190000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0,1],
+                    "tier": 4,
+                    "visibility": 2,
+                    "crafting-speed": 1.5,
+                    "waste-amount": 0.8,
+                    "production-cost": 1,
+                    "energy-usage": 1200,
+                },
+                {
+                    "name": "Laboratory centrifuge",
+                    "price": 140000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1,1],
+                    "tier": 3,
+                    "visibility": 1,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 150,
+                },
+                {
+                    "name": "Laboratory oven",
+                    "price": 95000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0,1],
+                    "tier": 3,
+                    "visibility": 1.5,
+                    "crafting-speed": 1.6,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 2000,
+                },
+                {
+                    "name": "Homemade soaking vat",
+                    "price": 12000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1,2],
+                    "tier": 2,
+                    "visibility": 2,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Growbox",
+                    "price": 33000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1,3],
+                    "tier": 1,
+                    "visibility": 1.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 80,
+                },
+                {
+                    "name": "bucket",
+                    "price": 1000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2,3],
+                    "tier": 1,
+                    "visibility": 0.5,
+                    "crafting-speed": 0.5,
+                    "waste-amount": 1.1,
+                    "production-cost": 1,
+                },
+            ],
+        },
+        {
+            "name": "Ghetto equipment store",
+            "area": Area.SLAVS_BAY,
+            "check-possible": false,
+            "location": {x: 0.409066, y: 0.546062 },
+            "discounts": [0.0, 0.1],
+            "furnitures": [
+                {
+                    "name": "Small container",
+                    "price": 300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [15],
+                    "substance-storage": 750,
+                },
+                {
+                    "name": "Medium container",
+                    "price": 500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                    "substance-storage": 1500,
+                },
+                {
+                    "name": "Large container",
+                    "price": 900,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                    "substance-storage": 5000,
+                },
+                {
+                    "name": "Small barrel",
+                    "price": 1200,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "substance-storage": 10000,
+                },
+                {
+                    "name": "Medium barrel",
+                    "price": 2500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "substance-storage": 20000,
+                    "visibility": 0.5,
+                },
+            ],
+            "equipments": [
+                {
+                    "name": "Laboratory tray",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "tier": 1,
+                    "visibility": 0.5,
+                    "hideout-stash": 1,
+                    "substance-storage": 150,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Kitchen stove with oven",
+                    "price": 25000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "tier": 1,
+                    "crafting-speed": 0.7,
+                    "waste-amount": 1.2,
+                    "production-cost": 1,
+                    "energy-usage": 2500,
+                },
+                {
+                    "name": "Electric pressure cooker",
+                    "price": 32500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "tier": 2,
+                    "visibility": 1,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 2000,
+                },
+                {
+                    "name": "Laboratory autoclave",
+                    "price": 65000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "tier": 2,
+                    "visibility": 2,
+                    "crafting-speed": 1.25,
+                    "waste-amount": 0.8,
+                    "production-cost": 1,
+                    "energy-usage": 1400,
+                },
+                {
+                    "name": "Laboratory water bath",
+                    "price": 110000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "tier": 3,
+                    "visibility": 1.5,
+                    "crafting-speed": 1.5,
+                    "waste-amount": 0.5,
+                    "production-cost": 1,
+                    "energy-usage": 2400,
+                },
+                {
+                    "name": "Laboratory centrifuge",
+                    "price": 140000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "tier": 3,
+                    "visibility": 1,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 150,
+                },
+                {
+                    "name": "Drying rack",
+                    "price": 11000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                    "tier": 1,
+                    "visibility": 1,
+                    "crafting-speed": 0.8,
+                    "waste-amount": 1.1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Drying outdoor rack",
+                    "price": 23000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "tier": 2,
+                    "visibility": 3.5,
+                    "crafting-speed": 1.05,
+                    "waste-amount": 1.1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Hybrid dryer",
+                    "price": 48000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "tier": 2,
+                    "visibility": 1,
+                    "crafting-speed": 1.3,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 50,
+                },
+                {
+                    "name": "Bucket",
+                    "price": 1000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "tier": 1,
+                    "visibility": 0.5,
+                    "crafting-speed": 0.5,
+                    "waste-amount": 1.1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Small fermentation vat",
+                    "price": 12000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "tier": 2,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Homemade soaking vat",
+                    "price": 42000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "tier": 2,
+                    "visibility": 2,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Growbox",
+                    "price": 33000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "tier": 1,
+                    "visibility": 1.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 80,
+                },
+                {
+                    "name": "Rack",
+                    "price": 35500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "tier": 2,
+                    "visibility": 1.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 150,
+                },
+                {
+                    "name": "Seedling box",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "tier": 2,
+                    "visibility": 0.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+            ],
+        },
+    ], // 0.460048, 0.796165 -- 0.277232, 0.635483 -- 0.409066, 0.546062
     "pawn-shops": [
         {
             "name": "Pawn Shop",
@@ -2453,6 +4012,108 @@ const data: Data
                 },
             ],
         },
+        {
+            "name": "Pawn Shop",
+            "area": Area.SLAVS_BAY,
+            "check-possible": false,
+            "location": { x: 0.398938, y: 0.575408 },
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": "Dog Tag",
+                    "price": 3600,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Watch",
+                    "price": 12000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Bracelet",
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Gold Chain",
+                    "price": 23100,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Plastic bag",
+                    "price": 500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Cash large",
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100000],
+                },
+            ],
+        },
+        {
+            "name": "Pawn Shop",
+            "area": Area.PENINSULAR,
+            "check-possible": false,
+            "location": { x: 0.29148, y: 0.603385 },
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": "Dog Tag",
+                    "price": 3600,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Watch",
+                    "price": 12000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Bracelet",
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Gold Chain",
+                    "price": 23100,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": "Plastic bag",
+                    "price": 500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Cash large",
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100000],
+                },
+            ],
+        },
     ],
     "anchor-spots": [
         {
@@ -2555,7 +4216,57 @@ const data: Data
             "area": Area.SLAVS_BAY,
             "location": { x: 0.470004, y: 0.581417 },
         },
-    ],
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.455241, y: 0.638944 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.435844, y: 0.635145 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.419708, y: 0.641496 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.42297, y: 0.635138 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.376279, y: 0.56528 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.38984, y: 0.533177 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.434642, y: 0.59618 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.415074, y: 0.59379 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.314139, y: 0.545369 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.276545, y: 0.547258 },
+        },
+    ], // 0.25423, 0.673769
     "bosses": [
         {
             "name": "Llanzo Jean-Louis",
@@ -2622,6 +4333,29 @@ const data: Data
                 },
             ],
         },
+        {
+            "name": "Kira",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.417992, y: 0.539531 },
+            "demands": [
+                {
+                    "name": "Marijuana",
+                    "price-per-g": 1500,
+                },
+                {
+                    "name": "Amphetamine",
+                    "price-per-g": 2000,
+                },
+                {
+                    "name": "Methamphetamine",
+                    "price-per-g": 3000,
+                },
+                {
+                    "name": "Opium",
+                    "price-per-g": 2100,
+                },
+            ],
+        },
     ],
     "cloth-shops": [
         {
@@ -2631,7 +4365,15 @@ const data: Data
             "check-possible": false,
             "discounts": [0.0, 0.1],
             "items": [],
-        }
+        },
+        {
+            "name": "Exclusive Boutique",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.292166, y: 0.598927 },
+            "check-possible": false,
+            "discounts": [0.0, 0.1],
+            "items": [],
+        },
     ],
     "restaurants": [
         {
@@ -2747,6 +4489,133 @@ const data: Data
                 },
             ],
         },
+        {
+            "name": "Sodoma i Gomora",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.417477, y: 0.537472 },
+            "check-possible": false,
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": "Small water bottle",
+                    "price": 500,
+                    "amount": 500,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Limonada de Coco",
+                    "price": 700,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Beer",
+                    "price": 700,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                },
+            ],
+        },
+        {
+            "name": "Perla de la Costa",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.265216, y: 0.582106 },
+            "check-possible": false,
+            "discounts": [0.0, 0.1, 0.2],
+            "items": [
+                {
+                    "name": "Small water bottle",
+                    "price": 700,
+                    "amount": 500,
+                    "unit": Unit.LIQUID,
+                    "quantity": [60, 80, 100],
+                },
+                {
+                    "name": "Limonada de Coco",
+                    "price": 1000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [50, 70, 100],
+                },
+                {
+                    "name": "Beer",
+                    "price": 800,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100, 150, 200],
+                },
+            ],
+        }, // Finished
+        {
+            "name": "El Sueno Morado",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.261611, y: 0.620733 },
+            "check-possible": false,
+            "discounts": [0.0, 0.1, 0.2],
+            "items": [
+                {
+                    "name": "Small water bottle",
+                    "price": 500,
+                    "amount": 500,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Limonada de Coco",
+                    "price": 700,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Beer",
+                    "price": 700,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+            ],
+        },
+        {
+            "name": "El Hueco Bar",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.268306, y: 0.651282 },
+            "check-possible": false,
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": "Small water bottle",
+                    "price": 500,
+                    "amount": 500,
+                    "unit": Unit.LIQUID,
+                    "quantity": [5],
+                },
+                {
+                    "name": "Limonada de Coco",
+                    "price": 700,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Beer",
+                    "price": 700,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                },
+                {
+                    "name": "Sausage",
+                    "price": 600,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+            ],
+        },
     ],
     "dealer-spots": [
         {
@@ -2829,7 +4698,27 @@ const data: Data
             "area": Area.JUNGLE,
             "location": { x: 0.531284, y: 0.602016 }
         },
-    ],
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.395848, y: 0.57266 }
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.417992, y: 0.570956 }
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.453353, y: 0.589498 },
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.437046, y: 0.547435 },
+        },
+    ], // 0.265216, 0.599265
     "medic-points": [
         {
             "name": "",
@@ -2847,6 +4736,24 @@ const data: Data
             "name": "",
             "area": Area.CALLEJON,
             "location": { x: 0.524418, y: 0.712051 },
+            "price": 0,
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.346067, y: 0.623989 },
+            "price": 0,
+        },
+        {
+            "name": "",
+            "area": Area.SLAVS_BAY,
+            "location": { x: 0.437046, y: 0.554646 },
+            "price": 0,
+        },
+        {
+            "name": "",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.28427, y: 0.635487 },
             "price": 0,
         },
     ],

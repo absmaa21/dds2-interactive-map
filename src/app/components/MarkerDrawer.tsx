@@ -1,7 +1,7 @@
 import React from 'react';
 import {Boss, Hideout, MedicPoint, Shop} from "@/pojos/data";
 import {Style} from "@/pojos/style";
-import {isBoss, isHideout, isShop} from "@/pojos/TypeChecks";
+import {isBoss, isFurniture, isHideout, isShop} from "@/pojos/Helpers";
 import HideoutDrawer from "@/app/components/HideoutDrawer";
 import ShopDrawer from "@/app/components/ShopDrawer";
 import BossDrawer from "@/app/components/BossDrawer";
@@ -21,8 +21,8 @@ function MarkerDrawer(props: Props) {
                         <h5 style={{color: 'rgba(255,255,255,0.2)', letterSpacing: 2}}>{props.chosenObj.area}</h5>
                         <div style={{marginTop: 6}}>
                             {isHideout(props.chosenObj) && <HideoutDrawer obj={props.chosenObj}/>}
-                            {isShop(props.chosenObj) && <ShopDrawer obj={props.chosenObj} itemSearch={props.itemSearch}/>}
                             {isBoss(props.chosenObj) && <BossDrawer obj={props.chosenObj}/>}
+                            {isShop(props.chosenObj) && <ShopDrawer obj={props.chosenObj} itemSearch={props.itemSearch}/>}
                         </div>
                     </div>
                 )}

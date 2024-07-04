@@ -3,6 +3,8 @@ import {Shop} from "@/pojos/data";
 import TextIconBoolean from "@/app/components/TextIconBoolean";
 import ToggleButtonGroup from './ToggleButtonGroup';
 import ShopItem from "@/app/components/ShopItem";
+import FurnitureItem from "@/app/components/FurnitureItem";
+import EquipItem from "@/app/components/EquipItem";
 
 interface Props {
     obj: Shop,
@@ -26,8 +28,18 @@ function ShopDrawer(props: Props) {
                 />
             ))}
 
-            {props.obj.items.map((item, i) => (
+            {props.obj.items && props.obj.items.map((item, i) => (
                 <ShopItem item={item} key={i} level={level}
+                          searched={item.name.toLowerCase().includes(props.itemSearch.toLowerCase()) && props.itemSearch.length > 0}/>
+            ))}
+
+            {props.obj.furnitures && props.obj.furnitures.map((item, i) => (
+                <FurnitureItem item={item} key={i} level={level}
+                          searched={item.name.toLowerCase().includes(props.itemSearch.toLowerCase()) && props.itemSearch.length > 0}/>
+            ))}
+
+            {props.obj.equipments && props.obj.equipments.map((item, i) => (
+                <EquipItem item={item} key={i} level={level}
                           searched={item.name.toLowerCase().includes(props.itemSearch.toLowerCase()) && props.itemSearch.length > 0}/>
             ))}
         </div>
