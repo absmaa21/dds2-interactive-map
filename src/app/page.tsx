@@ -9,8 +9,10 @@ import data, {Boss, Hideout, MedicPoint, Shop} from "@/pojos/data";
 import {Style} from "@/pojos/style";
 import IconButton from "@/app/components/IconButton";
 import settingImg from "@/assets/setting.png"
+import discordImg from "@/assets/discord.png"
 import Modal from "@/app/components/Modal";
 import Settings from "@/app/components/Settings";
+import {discordLink} from "@/pojos/faq"
 
 const defaultVisibleMarkers = [
     MarkerType.PAWN_SHOP,
@@ -86,7 +88,10 @@ export default function Home() {
                                   onClick={() => toggleType(MarkerType.MEDIC_POINT)}
                                   amount={data["medic-points"].length}/>
                 </div>
-                <IconButton opacity={.33} src={settingImg.src} onClick={toggleModal}/>
+                <div style={{display: 'flex', gap: 8}}>
+                    <IconButton opacity={.33} src={settingImg.src} onClick={toggleModal}/>
+                    <IconButton opacity={.33} src={discordImg.src} onClick={() => window.open(discordLink, "_blank")}/>
+                </div>
             </div>
 
             {showModal && (
