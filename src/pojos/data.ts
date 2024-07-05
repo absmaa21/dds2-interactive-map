@@ -80,8 +80,8 @@ export interface Equipment extends Furniture {
 
 const data: Data
     = {
-    "last-update": 1719601311809,
-    "version": 1,
+    "last-update": 1720175486923,
+    "version": 4,
     "game-version": "1.0.4",
     "hideouts": [
         {

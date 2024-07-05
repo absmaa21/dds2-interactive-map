@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+}
+
+.container p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.25);
+}
+
+.container p span {
+    font-weight: 300;
+}
+
+.faq-container h4 {
+    font-size: 15px;
+    color: rgba(255,255,255,.9);
+    margin-bottom: 2px;
+}
+
+.faq-container p {
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+a {
+    color: rgb(51, 173, 255, 0.5);
+    text-decoration-line: underline;
+}

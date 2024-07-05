@@ -117,12 +117,12 @@ function Leaflet(props: Leaflet) {
             minZoom={10}
             maxZoom={13}
             style={{height: '100vh', width: '100%'}}
-            maxBounds={L.latLngBounds([1,0], [0,1.15])}
+            maxBounds={L.latLngBounds(mapBounds.getSouthWest(), [mapBounds.getNorth(),mapBounds.getEast()+0.15])}
             maxBoundsViscosity={0.2}
         >
             <MapWithClick onClick={() => props.setChosenMarker(null)}/>
             <ImageOverlay
-                url='https://images2.imgbox.com/05/da/HR6pvX8T_o.jpg'
+                url='https://images2.imgbox.com/36/55/ESV6ctZc_o.jpg'
                 bounds={mapBounds}
             />
             <DraggableMarker/>
