@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useMemo, useState} from "react";
-import {MarkerType} from "@/pojos/enums";
+import {Area, MarkerType} from "@/pojos/enums";
 import ToggleButton from "@/app/components/ToggleButton";
 import dynamic from "next/dynamic";
 import MarkerDrawer from "@/app/components/MarkerDrawer";
