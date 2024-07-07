@@ -43,10 +43,12 @@ export interface Hideout extends Marker {
     "visibility:": number,
     "security": number,
     "comfort": number,
-    "running-water": boolean,
-    "phoneline": boolean,
-    "garden": boolean,
+    "running-water"?: boolean,
+    "phoneline"?: boolean,
+    "garden"?: boolean,
     "is_apartment"?: boolean,
+    "parking-spot"?: boolean,
+    "vault"?: boolean,
 }
 
 export interface Boss extends Marker {
@@ -60,6 +62,7 @@ export interface MedicPoint extends Marker {
 export interface DrugDemand {
     "name": string,
     "price-per-g": number,
+    "amount": number,
 }
 
 export interface Furniture extends IItem {
@@ -85,6 +88,7 @@ const data: Data
     "version": 5,
     "game-version": "1.0.5",
     "hideouts": [
+        // Small Island
         {
             "name": "Bunker",
             "area": Area.SMALL_ISLAND,
@@ -97,17 +101,16 @@ const data: Data
             "phoneline": false,
             "garden": false,
         },
+        // Archipelago
         {
             "name": "Cottage",
             "area": Area.ARCHI,
             "location": { x: 0.567675, y: 0.962162},
-            "price": 10,
+            "price": 360000,
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "Cottage",
@@ -120,6 +123,7 @@ const data: Data
             "running-water": true,
             "phoneline": true,
             "garden": true,
+            "parking-spot": true,
         },
         {
             "name": "House",
@@ -131,8 +135,20 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "parking-spot": true,
         },
+        {
+            "name": "House",
+            "area": Area.ARCHI,
+            "location": { x: 0.440135, y: 0.843888},
+            "price": 190000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "garden": true,
+            "parking-spot": true,
+        },
+        // Callejon
         {
             "name": "Cottage",
             "area": Area.CALLEJON,
@@ -143,18 +159,7 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
-        },
-        {
-            "name": "House",
-            "area": Area.ARCHI,
-            "location": { x: 0.440135, y: 0.843888},
-            "price": 190000,
-            "visibility:": 0,
-            "security": 0,
-            "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
+            "parking-spot": true,
             "garden": true,
         },
         {
@@ -167,7 +172,7 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "Cottage",
@@ -179,7 +184,7 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "Barak",
@@ -189,9 +194,7 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "Cottage",
@@ -201,10 +204,9 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
             "phoneline": true,
-            "garden": false,
         },
+        // Farmers Island
         {
             "name": "House",
             "area": Area.FARMERS_ISLAND,
@@ -217,6 +219,7 @@ const data: Data
             "phoneline": false,
             "garden": true,
         },
+        // Jungle
         {
             "name": "Apartment",
             "area": Area.JUNGLE,
@@ -227,7 +230,7 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "Cottage",
@@ -238,8 +241,7 @@ const data: Data
             "security": 0,
             "comfort": 0,
             "running-water": true,
-            "phoneline": false,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "House",
@@ -249,9 +251,9 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
             "phoneline": true,
-            "garden": false,
+            "garden": true,
+            "parking-spot": true,
         },
         {
             "name": "Cottage",
@@ -261,9 +263,9 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
             "phoneline": true,
-            "garden": false,
+            "garden": true,
+            "parking-spot": true,
         },
         {
             "name": "Cottage",
@@ -273,10 +275,9 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
+            "garden": true,
         },
+        // Slavs bay
         {
             "name": "House",
             "area": Area.SLAVS_BAY,
@@ -287,7 +288,7 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": true,
+            "parking-spot": true,
         },
         {
             "name": "Cottage",
@@ -297,9 +298,7 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
+            "garden": true,
         },
         {
             "name": "Cottage",
@@ -309,9 +308,7 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "Apartment",
@@ -323,7 +320,7 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "House",
@@ -333,20 +330,16 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
         },
+        // Peninsular
         {
             "name": "House",
-            "area": Area.SLAVS_BAY,
+            "area": Area.PENINSULAR,
             "location": { x: 0.283583, y: 0.553784 },
             "price": 535000,
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
             "garden": true,
         },
         {
@@ -359,7 +352,7 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "Apartment",
@@ -371,7 +364,8 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "garden": true,
+            "parking-spot": true,
         },
         {
             "name": "House",
@@ -381,9 +375,6 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
         },
         {
             "name": "Warehouse",
@@ -394,21 +385,22 @@ const data: Data
             "security": 0,
             "comfort": 0,
             "running-water": true,
-            "phoneline": false,
-            "garden": true,
+            "parking-spot": true,
         },
         {
-            "name": "Cocaine Lab",
-            "area": Area.DUENO_DEL_MAR,
-            "location": { x:  0.445285, y: 0.445625 },
-            "price": 4000000,
+            "name": "Villa",
+            "area": Area.PENINSULAR,
+            "location": { x: 0.236205, y: 0.672398 },
+            "price": 4650000,
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
+            "phoneline": true,
+            "running-water": true,
             "garden": true,
+            "parking-spot": true,
         },
+        // Sangrienta
         {
             "name": "Villa",
             "area": Area.SANGRIENTA,
@@ -420,6 +412,7 @@ const data: Data
             "running-water": true,
             "phoneline": true,
             "garden": true,
+            "parking-spot": true,
         },
         {
             "name": "Shed",
@@ -429,9 +422,6 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
         },
         {
             "name": "House",
@@ -443,7 +433,7 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "parking-spot": true,
         },
         {
             "name": "Apartment",
@@ -455,7 +445,20 @@ const data: Data
             "comfort": 0,
             "running-water": true,
             "phoneline": true,
-            "garden": false,
+            "garden": true,
+            "parking-spot": true,
+        },
+        // Volcano Island
+        // Dueno del mar
+        {
+            "name": "Cocaine Lab",
+            "area": Area.DUENO_DEL_MAR,
+            "location": { x:  0.445285, y: 0.445625 },
+            "price": 4000000,
+            "visibility:": 0,
+            "security": 0,
+            "comfort": 0,
+            "garden": true,
         },
         {
             "name": "Cottage",
@@ -468,19 +471,17 @@ const data: Data
             "running-water": true,
             "phoneline": true,
             "garden": true,
+            "parking-spot": true,
             "is_apartment": true,
         },
         {
-            "name": "Cottage in Jungle",
+            "name": "Cottage",
             "area": Area.DUENO_DEL_MAR,
             "location": { x: 0.465712, y: 0.424851 },
             "price": 210000,
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
         },
         {
             "name": "Garage",
@@ -490,12 +491,12 @@ const data: Data
             "visibility:": 0,
             "security": 0,
             "comfort": 0,
-            "running-water": false,
-            "phoneline": false,
-            "garden": false,
         },
-    ], //
+        // Bahia - Downtown
+        // Bahia - Favela
+    ],
     "shops": [
+        // Small Island
         {
             "name": "Shop",
             "area": Area.SMALL_ISLAND,
@@ -557,6 +558,72 @@ const data: Data
                 }
             ]
         },
+        {
+            "name": "Marcus",
+            "area": Area.SMALL_ISLAND,
+            "check-possible": false,
+            "location": { x: 0.323065, y: 0.944824 },
+            "discounts": [0.0, 0.1, 0.15, 0.2],
+            "items": [
+                {
+                    "name": Item.PLASTIC_BAGGIES,
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [50, 100, 150],
+                },
+                {
+                    "name": Item.VIAL,
+                    "price": 2,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [30, 50, 80],
+                },
+                {
+                    "name": Item.ETHANOL,
+                    "price": 480,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [30, 50, 80],
+                },
+                {
+                    "name": Item.ACETONE,
+                    "price": 3000,
+                    "amount": 1000,
+                    "unit": Unit.LIQUID,
+                    "quantity": [0,2,3],
+                },
+                {
+                    "name": Item.AMP,
+                    "price": 12000,
+                    "amount": 10,
+                    "unit": Unit.MASS,
+                    "quantity": [3,5,6],
+                },
+                {
+                    "name": Item.PHENYL,
+                    "price": 2400,
+                    "amount": 200,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10,12,15],
+                },
+                {
+                    "name": Item.ACETIC_ACID,
+                    "price": 200,
+                    "amount": 100,
+                    "unit": Unit.LIQUID,
+                    "quantity": [10,20,30],
+                },
+                {
+                    "name": Item.AMP,
+                    "price": 61000,
+                    "amount": 50,
+                    "unit": Unit.MASS,
+                    "quantity": [0,1,1],
+                },
+            ]
+        },
+        // Archipelago
         {
             "name": "General Store",
             "area": Area.ARCHI,
@@ -925,71 +992,7 @@ const data: Data
                 },
             ]
         },
-        {
-            "name": "Marcus",
-            "area": Area.SMALL_ISLAND,
-            "check-possible": false,
-            "location": { x: 0.323065, y: 0.944824 },
-            "discounts": [0.0, 0.1, 0.15, 0.2],
-            "items": [
-                {
-                    "name": Item.PLASTIC_BAGGIES,
-                    "price": 1,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [50, 100, 150],
-                },
-                {
-                    "name": Item.VIAL,
-                    "price": 2,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [30, 50, 80],
-                },
-                {
-                    "name": Item.ETHANOL,
-                    "price": 480,
-                    "amount": 200,
-                    "unit": Unit.LIQUID,
-                    "quantity": [30, 50, 80],
-                },
-                {
-                    "name": Item.ACETONE,
-                    "price": 3000,
-                    "amount": 1000,
-                    "unit": Unit.LIQUID,
-                    "quantity": [0,2,3],
-                },
-                {
-                    "name": Item.AMP,
-                    "price": 12000,
-                    "amount": 10,
-                    "unit": Unit.MASS,
-                    "quantity": [3,5,6],
-                },
-                {
-                    "name": Item.PHENYL,
-                    "price": 2400,
-                    "amount": 200,
-                    "unit": Unit.LIQUID,
-                    "quantity": [10,12,15],
-                },
-                {
-                    "name": Item.ACETIC_ACID,
-                    "price": 200,
-                    "amount": 100,
-                    "unit": Unit.LIQUID,
-                    "quantity": [10,20,30],
-                },
-                {
-                    "name": Item.AMP,
-                    "price": 61000,
-                    "amount": 50,
-                    "unit": Unit.MASS,
-                    "quantity": [0,1,1],
-                },
-            ]
-        },
+        // Callejon
         {
             "name": "Mini market",
             "area": Area.CALLEJON,
@@ -1258,78 +1261,6 @@ const data: Data
                 },
             ]
         }, // Finished
-        {
-            "name": "Farm Shop",
-            "area": Area.FARMERS_ISLAND,
-            "check-possible": false,
-            "location": { x: 0.64715, y: 0.810239 },
-            "discounts": [0.0, 0.1],
-            "items": [
-                {
-                    "name": Item.UV_BULB_LARGE,
-                    "price": 9000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [5],
-                },
-                {
-                    "name": Item.HYDROPONIC_ELEMENTS,
-                    "price": 9000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [5],
-                },
-                {
-                    "name": Item.FLOWER_POT,
-                    "price": 2000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [5],
-                },
-                {
-                    "name": Item.PACKET_FLOUR,
-                    "price": 550,
-                    "amount": 1000,
-                    "unit": Unit.MASS,
-                    "quantity": [50],
-                },
-                {
-                    "name": Item.FERTILIZER,
-                    "price": 8500,
-                    "amount": 5000,
-                    "unit": Unit.MASS,
-                    "quantity": [5],
-                },
-                {
-                    "name": Item.FERTILIZER_SYNTHETIC,
-                    "price": 1200,
-                    "amount": 3000,
-                    "unit": Unit.MASS,
-                    "quantity": [3],
-                },
-                {
-                    "name": Item.ERGOT_RYE,
-                    "price": 1800,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [50],
-                },
-                {
-                    "name": Item.SHOVEL,
-                    "price": 9000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [1],
-                },
-                {
-                    "name": Item.PITCHFORK,
-                    "price": 10000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [1],
-                },
-            ]
-        },
         {
             "name": "Fuel depot",
             "area": Area.CALLEJON,
@@ -1833,6 +1764,159 @@ const data: Data
                 },
             ]
         },
+        // Farmers island
+        {
+            "name": "Farm Shop",
+            "area": Area.FARMERS_ISLAND,
+            "check-possible": false,
+            "location": { x: 0.64715, y: 0.810239 },
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": Item.UV_BULB_LARGE,
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": Item.HYDROPONIC_ELEMENTS,
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": Item.FLOWER_POT,
+                    "price": 2000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                },
+                {
+                    "name": Item.PACKET_FLOUR,
+                    "price": 550,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [50],
+                },
+                {
+                    "name": Item.FERTILIZER,
+                    "price": 8500,
+                    "amount": 5000,
+                    "unit": Unit.MASS,
+                    "quantity": [5],
+                },
+                {
+                    "name": Item.FERTILIZER_SYNTHETIC,
+                    "price": 1200,
+                    "amount": 3000,
+                    "unit": Unit.MASS,
+                    "quantity": [3],
+                },
+                {
+                    "name": Item.ERGOT_RYE,
+                    "price": 1800,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [50],
+                },
+                {
+                    "name": Item.SHOVEL,
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+                {
+                    "name": Item.PITCHFORK,
+                    "price": 10000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                },
+            ]
+        },
+        {
+            "name": "Poppy store",
+            "area": Area.FARMERS_ISLAND,
+            "check-possible": false,
+            "location": { x: 0.646806, y: 0.846119 },
+            "discounts": [0.0, 0.1, 0.2],
+            "items": [
+                {
+                    "name": Item.POPPY_HEAD_YOUNG,
+                    "price": 550,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [100, 200, 300],
+                },
+                {
+                    "name": Item.POPPY_SEED_PACK,
+                    "price": 3200,
+                    "amount": 100,
+                    "unit": Unit.MASS,
+                    "quantity": [30, 50, 70],
+                },
+                {
+                    "name": Item.POPPY_SEED_PACK,
+                    "price": 31000,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [2, 4, 6],
+                },
+                {
+                    "name": Item.FERTILIZER,
+                    "price": 8500,
+                    "amount": 5000,
+                    "unit": Unit.MASS,
+                    "quantity": [5, 8, 13],
+                },
+                {
+                    "name": Item.FERTILIZER_SYNTHETIC,
+                    "price": 1200,
+                    "amount": 300,
+                    "unit": Unit.MASS,
+                    "quantity": [3, 5, 9],
+                },
+                {
+                    "name": Item.UV_BULB_LARGE,
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5, 8, 10],
+                },
+                {
+                    "name": Item.FLOWER_POT,
+                    "price": 2000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5, 10, 15],
+                },
+                {
+                    "name": Item.HYDROPONIC_ELEMENTS,
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, 2, 3],
+                },
+                {
+                    "name": Item.SHOVEL,
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, 2, 3],
+                },
+                {
+                    "name": Item.PITCHFORK,
+                    "price": 10000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, 2, 3],
+                },
+            ]
+        }, // Finished
+        // Jungle
         {
             "name": "Hardware store",
             "area": Area.JUNGLE,
@@ -2115,85 +2199,6 @@ const data: Data
                 },
             ],
         },
-        {
-            "name": "Poppy store",
-            "area": Area.FARMERS_ISLAND,
-            "check-possible": false,
-            "location": { x: 0.646806, y: 0.846119 },
-            "discounts": [0.0, 0.1, 0.2],
-            "items": [
-                {
-                    "name": Item.POPPY_HEAD_YOUNG,
-                    "price": 550,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [100, 200, 300],
-                },
-                {
-                    "name": Item.POPPY_SEED_PACK,
-                    "price": 3200,
-                    "amount": 100,
-                    "unit": Unit.MASS,
-                    "quantity": [30, 50, 70],
-                },
-                {
-                    "name": Item.POPPY_SEED_PACK,
-                    "price": 31000,
-                    "amount": 1000,
-                    "unit": Unit.MASS,
-                    "quantity": [2, 4, 6],
-                },
-                {
-                    "name": Item.FERTILIZER,
-                    "price": 8500,
-                    "amount": 5000,
-                    "unit": Unit.MASS,
-                    "quantity": [5, 8, 13],
-                },
-                {
-                    "name": Item.FERTILIZER_SYNTHETIC,
-                    "price": 1200,
-                    "amount": 300,
-                    "unit": Unit.MASS,
-                    "quantity": [3, 5, 9],
-                },
-                {
-                    "name": Item.UV_BULB_LARGE,
-                    "price": 9000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [5, 8, 10],
-                },
-                {
-                    "name": Item.FLOWER_POT,
-                    "price": 2000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [5, 10, 15],
-                },
-                {
-                    "name": Item.HYDROPONIC_ELEMENTS,
-                    "price": 9000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [1, 2, 3],
-                },
-                {
-                    "name": Item.SHOVEL,
-                    "price": 9000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [1, 2, 3],
-                },
-                {
-                    "name": Item.PITCHFORK,
-                    "price": 10000,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [1, 2, 3],
-                },
-            ]
-        }, // Finished
         {
             "name": "Moonshiner",
             "area": Area.JUNGLE,
@@ -2496,6 +2501,7 @@ const data: Data
                 },
             ]
         },
+        // Slavs bay
         {
             "name": "Bogdan the mechanic",
             "area": Area.SLAVS_BAY,
@@ -3075,6 +3081,7 @@ const data: Data
                 },
             ]
         },
+        // Peninsular
         {
             "name": "Mini-market",
             "area": Area.PENINSULAR,
@@ -3506,6 +3513,60 @@ const data: Data
                 },
             ]
         },
+        // Sangrienta
+        {
+            "name": "The baker",
+            "area": Area.SANGRIENTA,
+            "check-possible": false,
+            "location": {x: 0.546733, y: 0.371113 },
+            "discounts": [0.0, 0.1],
+            "items": [
+                {
+                    "name": Item.PACKET_FLOUR,
+                    "price": 550,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [20],
+                },
+                {
+                    "name": Item.ERGOT_RYE,
+                    "price": 1100,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                },
+                {
+                    "name": Item.POPPY_SEED_PACK,
+                    "price": 31000,
+                    "amount": 1000,
+                    "unit": Unit.MASS,
+                    "quantity": [1],
+                },
+                {
+                    "name": Item.POPPY_HEAD_YOUNG,
+                    "price": 550,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10],
+                },
+                {
+                    "name": Item.OPIUM,
+                    "price": 13200,
+                    "amount": 10,
+                    "unit": Unit.MASS,
+                    "quantity": [2],
+                },
+                {
+                    "name": Item.PLASTIC_BAGGIES,
+                    "price": 1,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [50],
+                },
+            ]
+        },
+        // Volcano Island
+        // Dueno del mar
         {
             "name": "Pharmacy",
             "area": Area.DUENO_DEL_MAR,
@@ -3592,58 +3653,9 @@ const data: Data
                 },
             ]
         },
-        {
-            "name": "The baker",
-            "area": Area.SANGRIENTA,
-            "check-possible": false,
-            "location": {x: 0.546733, y: 0.371113 },
-            "discounts": [0.0, 0.1],
-            "items": [
-                {
-                    "name": Item.PACKET_FLOUR,
-                    "price": 550,
-                    "amount": 1000,
-                    "unit": Unit.MASS,
-                    "quantity": [20],
-                },
-                {
-                    "name": Item.ERGOT_RYE,
-                    "price": 1100,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [10],
-                },
-                {
-                    "name": Item.POPPY_SEED_PACK,
-                    "price": 31000,
-                    "amount": 1000,
-                    "unit": Unit.MASS,
-                    "quantity": [1],
-                },
-                {
-                    "name": Item.POPPY_HEAD_YOUNG,
-                    "price": 550,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [10],
-                },
-                {
-                    "name": Item.OPIUM,
-                    "price": 13200,
-                    "amount": 10,
-                    "unit": Unit.MASS,
-                    "quantity": [2],
-                },
-                {
-                    "name": Item.PLASTIC_BAGGIES,
-                    "price": 1,
-                    "amount": 1,
-                    "unit": Unit.ITEM,
-                    "quantity": [50],
-                },
-            ]
-        },
-    ], //
+        // Bahia - Downtown
+        // Bahia - Favela
+    ],
     "equip-shops": [
         {
             "name": "Watto",
@@ -4559,14 +4571,17 @@ const data: Data
             "demands": [
                 {
                     "name": "Marijuana",
+                    "amount": 125,
                     "price-per-g": 1900,
                 },
                 {
                     "name": Item.AMP,
+                    "amount": 75,
                     "price-per-g": 2500,
                 },
                 {
                     "name": Item.METH,
+                    "amount": 50,
                     "price-per-g": 3000,
                 },
             ],
@@ -4578,18 +4593,22 @@ const data: Data
             "demands": [
                 {
                     "name": "Marijuana",
+                    "amount": 125,
                     "price-per-g": 1500,
                 },
                 {
                     "name": Item.AMP,
+                    "amount": 150,
                     "price-per-g": 2000,
                 },
                 {
                     "name": Item.METH,
+                    "amount": 75,
                     "price-per-g": 3000,
                 },
                 {
                     "name": "Opium",
+                    "amount": 50,
                     "price-per-g": 2200,
                 },
             ],
@@ -4601,18 +4620,22 @@ const data: Data
             "demands": [
                 {
                     "name": "Marijuana",
+                    "amount": 50,
                     "price-per-g": 2000,
                 },
                 {
                     "name": Item.AMP,
+                    "amount": 75,
                     "price-per-g": 2000,
                 },
                 {
                     "name": Item.METH,
+                    "amount": 150,
                     "price-per-g": 3000,
                 },
                 {
                     "name": "Opium",
+                    "amount": 50,
                     "price-per-g": 2200,
                 },
             ],
@@ -4624,18 +4647,22 @@ const data: Data
             "demands": [
                 {
                     "name": "Marijuana",
+                    "amount": 175,
                     "price-per-g": 1500,
                 },
                 {
                     "name": Item.AMP,
+                    "amount": 150,
                     "price-per-g": 2000,
                 },
                 {
                     "name": Item.METH,
+                    "amount": 275,
                     "price-per-g": 3000,
                 },
                 {
-                    "name": "Opium",
+                    "name": Item.OPIUM,
+                    "amount": 100,
                     "price-per-g": 2100,
                 },
             ],
@@ -4647,23 +4674,27 @@ const data: Data
             "demands": [
                 {
                     "name": "Marijuana",
+                    "amount": 100,
                     "price-per-g": 2700,
                 },
                 {
                     "name": Item.AMP,
+                    "amount": 125,
                     "price-per-g": 3200,
                 },
                 {
                     "name": Item.METH,
+                    "amount": 50,
                     "price-per-g": 4000,
                 },
                 {
                     "name": Item.COCS,
+                    "amount": 150,
                     "price-per-g": 7000,
                 },
             ],
         },
-    ], //
+    ],
     "cloth-shops": [
         {
             "name": "Second hand store",
