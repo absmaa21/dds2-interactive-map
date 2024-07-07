@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useMemo, useState} from "react";
-import {Area, MarkerType} from "@/pojos/enums";
+import {MarkerType} from "@/pojos/enums";
 import ToggleButton from "@/app/components/ToggleButton";
 import dynamic from "next/dynamic";
 import MarkerDrawer from "@/app/components/MarkerDrawer";
@@ -58,6 +58,7 @@ export default function Home() {
             <Map visibleTypes={visibleTypes} itemSearch={itemSearch} setChosenMarker={setChosenMarker}/>
             <div style={drawer}>
                 <div style={buttonContainer}>
+                    <h1 style={{textAlign: 'center', fontSize: 26}}>DDS2 Interactive Map</h1>
                     <h3>Search item</h3>
                     <input style={inputStyle} type={"search"} value={itemSearch}
                            onChange={e => setItemSearch(e.target.value)}/>
@@ -95,7 +96,7 @@ export default function Home() {
             </div>
 
             {showModal && (
-                <Modal toggle={toggleModal} title={'Settings'}><Settings/></Modal>
+                <Modal toggle={toggleModal} title={'Settings & FAQ'}><Settings/></Modal>
             )}
         </div>
     );

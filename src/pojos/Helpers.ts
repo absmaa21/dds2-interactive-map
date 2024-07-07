@@ -1,4 +1,4 @@
-import {Boss, Equipment, Furniture, Hideout, Item, Shop} from "@/pojos/data";
+import {Boss, Equipment, Furniture, Hideout, IItem, Shop} from "@/pojos/data";
 
 export function isShop(obj: any): obj is Shop {
     return obj["check-possible"] !== undefined && obj['discounts'] !== undefined
@@ -21,7 +21,7 @@ export function isEquipment(obj: any): obj is Equipment {
     return obj["tier"] !== undefined
 }
 
-export function getAvailableLevel(item: Item) {
+export function getAvailableLevel(item: IItem) {
     let lvl = 0;
     for (let i = 0; i < item.quantity.length; i++) {
         lvl = i

@@ -1,10 +1,10 @@
 import React from 'react';
-import {Item} from "@/pojos/data";
+import {IItem} from "@/pojos/data";
 import {Unit} from "@/pojos/enums";
 import {getAvailableLevel} from "@/pojos/Helpers";
 
 interface Props {
-    item: Item,
+    item: IItem,
     level: number,
     searched?: boolean,
 }

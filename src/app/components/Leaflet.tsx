@@ -4,7 +4,7 @@ import {MapContainer, ImageOverlay, Marker, Popup, useMapEvents} from 'react-lea
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import DraggableMarker from "@/app/components/DraggableMarker";
-import data, {Item} from "@/pojos/data";
+import data, {IItem} from "@/pojos/data";
 import {MarkerType} from "@/pojos/enums";
 import shopImg from "../../assets/store-marker.png"
 import hideoutImg from "../../assets/hideout-marker.png"
@@ -105,7 +105,7 @@ const MapWithClick: React.FC<{ onClick: () => void }> = ({onClick}) => {
 function Leaflet(props: Leaflet) {
     const mapBounds = L.latLngBounds([1, 0], [0, 1])
 
-    function hasItem(array: Item[]) {
+    function hasItem(array: IItem[]) {
         if (!array) return false
         return array.some(item => item.name.toLowerCase().includes(props.itemSearch.toLowerCase()))
     }
