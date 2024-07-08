@@ -129,7 +129,7 @@ function Leaflet(props: Leaflet) {
             minZoom={10}
             maxZoom={13}
             style={{height: '100vh', width: '100%'}}
-            maxBounds={L.latLngBounds(mapBounds.getSouthWest(), [mapBounds.getNorth(), mapBounds.getEast() + 0.15])}
+            maxBounds={L.latLngBounds(mapBounds.getSouthWest(), [mapBounds.getNorth(), mapBounds.getEast() + 0.2])}
             maxBoundsViscosity={0.2}
         >
             <MapWithClick onClick={() => props.setChosenMarker(null)}/>

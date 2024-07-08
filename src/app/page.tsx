@@ -71,7 +71,8 @@ export default function Home() {
                 <div style={buttonContainer}>
                     <h1 style={{textAlign: 'center', fontSize: 26}}>DDS2 Interactive Map</h1>
                     <h3>Search item</h3>
-                    <AutocompleteInput value={itemSearch} setValue={setItemSearch} suggestionValues={Object.values(Item)} setSelectedItems={setSelectedItems} handleSubmit={handleSubmit}/>
+                    <AutocompleteInput value={itemSearch} setValue={setItemSearch} suggestionValues={Object.values(Item)}
+                                       setSelectedItems={setSelectedItems} handleSubmit={handleSubmit}/>
                     <div style={selectedItemsContainer}>
                         {selectedItems.map(item => <div style={selectedItemStyle} onClick={() => removeItem(item)}>{item}</div>)}
                     </div>
@@ -108,9 +109,7 @@ export default function Home() {
                 </div>
             </div>
 
-            {showModal && (
-                <Modal toggle={toggleModal} title={'Settings & FAQ'}><Settings/></Modal>
-            )}
+            {showModal && <Modal toggle={toggleModal} title={'Settings & FAQ'}><Settings/></Modal>}
         </div>
     );
 }
@@ -119,7 +118,8 @@ const drawer: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    width: '20%',
+    minWidth: '11.5%',
+    maxWidth: '11.5%',
     padding: 8,
     backgroundColor: Style.bgPrimary,
 }
