@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useMemo, useState} from "react";
-import {MarkerType} from "@/pojos/enums";
+import {Item, MarkerType} from "@/pojos/enums";
 import ToggleButton from "@/app/components/ToggleButton";
 import dynamic from "next/dynamic";
 import MarkerDrawer from "@/app/components/MarkerDrawer";
@@ -13,6 +13,7 @@ import discordImg from "@/assets/discord.png"
 import Modal from "@/app/components/Modal";
 import Settings from "@/app/components/Settings";
 import {discordLink} from "@/pojos/faq"
+import AutocompleteInput from "@/app/components/AutocompleteInput";
 
 const defaultVisibleMarkers = [
     MarkerType.PAWN_SHOP,
@@ -46,22 +47,34 @@ export default function Home() {
         );
     };
 
-    const [itemSearch, setItemSearch] = useState('')
+    const [itemSearch, setItemSearch] = useState<string>('')
+    const [selectedItems, setSelectedItems] = useState<string[]>([])
     const [chosenMarker, setChosenMarker] = useState<null | Shop | Hideout | Boss | MedicPoint>(null)
     const [showModal, setShowModal] = useState(false)
+
+    function handleSubmit(item: string) {
+        if(selectedItems.includes(item)) return
+        setSelectedItems(prev => [...prev, item])
+    }
+
+    function removeItem(item: string) {
+        setSelectedItems(selectedItems.filter(i => i !== item))
+    }
 
     function toggleModal() { setShowModal(!showModal) }
 
     return (
         <div style={{display: "flex", flexDirection: 'row', backgroundColor: '#000'}}>
-            <MarkerDrawer chosenObj={chosenMarker} itemSearch={itemSearch}/>
-            <Map visibleTypes={visibleTypes} itemSearch={itemSearch} setChosenMarker={setChosenMarker}/>
+            <MarkerDrawer chosenObj={chosenMarker} searchedItems={[...selectedItems, itemSearch]}/>
+            <Map visibleTypes={visibleTypes} itemSearch={itemSearch} setChosenMarker={setChosenMarker} selectedItems={selectedItems}/>
             <div style={drawer}>
                 <div style={buttonContainer}>
                     <h1 style={{textAlign: 'center', fontSize: 26}}>DDS2 Interactive Map</h1>
                     <h3>Search item</h3>
-                    <input style={inputStyle} type={"search"} value={itemSearch}
-                           onChange={e => setItemSearch(e.target.value)}/>
+                    <AutocompleteInput value={itemSearch} setValue={setItemSearch} suggestionValues={Object.values(Item)} setSelectedItems={setSelectedItems} handleSubmit={handleSubmit}/>
+                    <div style={selectedItemsContainer}>
+                        {selectedItems.map(item => <div style={selectedItemStyle} onClick={() => removeItem(item)}>{item}</div>)}
+                    </div>
                     <h3>Filter markers</h3>
                     <ToggleButton text={'Hideouts'} selected={visibleTypes.includes(MarkerType.HIDEOUT)}
                                   onClick={() => toggleType(MarkerType.HIDEOUT)} amount={data.hideouts.length}/>
@@ -118,12 +131,17 @@ const buttonContainer: React.CSSProperties = {
     width: '100%',
 }
 
-const inputStyle: React.CSSProperties = {
-    fontSize: 16,
-    lineHeight: 2,
-    marginBottom: 4,
-    borderWidth: 0,
-    borderRadius: 8,
-    paddingInline: 4,
-    backgroundColor: Style.btnBg,
+const selectedItemsContainer: React.CSSProperties = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 4,
+}
+
+const selectedItemStyle: React.CSSProperties = {
+    padding: 4,
+    paddingInline: 8,
+    borderRadius: 16,
+    overflow: 'hidden',
+    cursor: 'pointer',
+    backgroundColor: Style.bgSecondary,
 }

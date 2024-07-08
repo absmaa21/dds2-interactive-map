@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {MapContainer, ImageOverlay, Marker, Popup, useMapEvents} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -16,6 +16,7 @@ import restaurantImg from "../../assets/restaurant-marker.png"
 import clothImg from "../../assets/shirt-marker.png"
 import furnitureImg from "../../assets/furniture-marker.png"
 import dealerImg from "../../assets/dealer-marker.png"
+import useDebouncedState from "@restart/hooks/useDebouncedState";
 
 const size = 0.3
 
@@ -92,6 +93,7 @@ const dealerIcon = new L.Icon({
 interface Leaflet {
     visibleTypes: string[],
     itemSearch: string,
+    selectedItems: string[],
     setChosenMarker: (obj: any) => void,
 }
 
@@ -104,10 +106,20 @@ const MapWithClick: React.FC<{ onClick: () => void }> = ({onClick}) => {
 
 function Leaflet(props: Leaflet) {
     const mapBounds = L.latLngBounds([1, 0], [0, 1])
+    const [searchedItems, setSearchedItem]
+        = useState<string[]>([...props.selectedItems, props.itemSearch])
+    const [searchingForItem, setSearchingForItem]
+        = useState<boolean>(props.selectedItems.length > 0 || props.itemSearch.length > 0)
+
+    useEffect(() => {
+        setSearchedItem([...props.selectedItems, props.itemSearch])
+        setSearchingForItem(props.selectedItems.length > 0 || props.itemSearch.length > 0)
+    }, [props.selectedItems, props.itemSearch])
 
     function hasItem(array: IItem[]) {
         if (!array) return false
-        return array.some(item => item.name.toLowerCase().includes(props.itemSearch.toLowerCase()))
+        return array.some(el => searchedItems.includes(el.name))
+            || (array.some(item => item.name.toLowerCase().includes(props.itemSearch.toLowerCase())) && props.itemSearch.length > 0)
     }
 
     return (
@@ -117,7 +129,7 @@ function Leaflet(props: Leaflet) {
             minZoom={10}
             maxZoom={13}
             style={{height: '100vh', width: '100%'}}
-            maxBounds={L.latLngBounds(mapBounds.getSouthWest(), [mapBounds.getNorth(),mapBounds.getEast()+0.15])}
+            maxBounds={L.latLngBounds(mapBounds.getSouthWest(), [mapBounds.getNorth(), mapBounds.getEast() + 0.15])}
             maxBoundsViscosity={0.2}
         >
             <MapWithClick onClick={() => props.setChosenMarker(null)}/>
@@ -126,9 +138,9 @@ function Leaflet(props: Leaflet) {
                 bounds={mapBounds}
             />
             <DraggableMarker/>
-            {(props.visibleTypes.includes(MarkerType.SHOP) || props.itemSearch.length > 0) &&
+            {(props.visibleTypes.includes(MarkerType.SHOP) || searchingForItem) &&
                 data.shops.map((m, i) => {
-                    if (hasItem(m.items!) || props.itemSearch.length <= 0) {
+                    if (hasItem(m.items!) || !searchingForItem) {
                         return (
                             <Marker key={i} position={L.latLng(m.location.x, m.location.y)} icon={shopIcon}
                                     eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
@@ -138,16 +150,16 @@ function Leaflet(props: Leaflet) {
                 })
             }
 
-            {props.visibleTypes.includes(MarkerType.HIDEOUT) && props.itemSearch.length <= 0 &&
+            {props.visibleTypes.includes(MarkerType.HIDEOUT) && !searchingForItem &&
                 data.hideouts.map((m, i) => (
                     <Marker key={i + 100} position={L.latLng(m.location.x, m.location.y)} icon={hideoutIcon}
                             eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
                 ))
             }
 
-            {(props.visibleTypes.includes(MarkerType.PAWN_SHOP) || props.itemSearch.length > 0) &&
+            {(props.visibleTypes.includes(MarkerType.PAWN_SHOP) || searchingForItem) &&
                 data["pawn-shops"].map((m, i) => {
-                    if (hasItem(m.items!) || props.itemSearch.length <= 0) {
+                    if (hasItem(m.items!) || !searchingForItem) {
                         return (
                             <Marker key={i + 200} position={L.latLng(m.location.x, m.location.y)} icon={pawnshopIcon}
                                     eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
@@ -157,23 +169,23 @@ function Leaflet(props: Leaflet) {
                 })
             }
 
-            {props.visibleTypes.includes(MarkerType.BOAT_DOCK) && props.itemSearch.length <= 0 &&
+            {props.visibleTypes.includes(MarkerType.BOAT_DOCK) && !searchingForItem &&
                 data["anchor-spots"].map((m, i) => (
                     <Marker key={i + 300} position={L.latLng(m.location.x, m.location.y)} icon={anchorIcon}
                             eventHandlers={{click: () => props.setChosenMarker(null)}}/>
                 ))
             }
 
-            {props.visibleTypes.includes(MarkerType.BOSS) && props.itemSearch.length <= 0 &&
+            {props.visibleTypes.includes(MarkerType.BOSS) && !searchingForItem &&
                 data["bosses"].map((m, i) => (
                     <Marker key={i + 400} position={L.latLng(m.location.x, m.location.y)} icon={heartIcon}
                             eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
                 ))
             }
 
-            {(props.visibleTypes.includes(MarkerType.RESTAURANT) || props.itemSearch.length > 0) &&
+            {(props.visibleTypes.includes(MarkerType.RESTAURANT) || searchingForItem) &&
                 data["restaurants"].map((m, i) => {
-                    if (hasItem(m.items!) || props.itemSearch.length <= 0) {
+                    if (hasItem(m.items!) || !searchingForItem) {
                         return (
                             <Marker key={i + 500} position={L.latLng(m.location.x, m.location.y)}
                                     icon={restaurantIcon} eventHandlers={{click: () => props.setChosenMarker(m)}}>
@@ -184,9 +196,9 @@ function Leaflet(props: Leaflet) {
                 })
             }
 
-            {(props.visibleTypes.includes(MarkerType.CLOTH_SHOP) || props.itemSearch.length > 0) &&
+            {(props.visibleTypes.includes(MarkerType.CLOTH_SHOP) || searchingForItem) &&
                 data["cloth-shops"].map((m, i) => {
-                    if (hasItem(m.items!) || props.itemSearch.length <= 0) {
+                    if (hasItem(m.items!) || !searchingForItem) {
                         return (
                             <Marker key={i + 600} position={L.latLng(m.location.x, m.location.y)} icon={clothIcon}
                                     eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
@@ -196,23 +208,23 @@ function Leaflet(props: Leaflet) {
                 })
             }
 
-            {props.visibleTypes.includes(MarkerType.DEALER_SPOT) && props.itemSearch.length <= 0 &&
+            {props.visibleTypes.includes(MarkerType.DEALER_SPOT) && !searchingForItem &&
                 data["dealer-spots"].map((m, i) => (
                     <Marker key={i + 700} position={L.latLng(m.location.x, m.location.y)} icon={dealerIcon}
                             eventHandlers={{click: () => props.setChosenMarker(null)}}/>
                 ))
             }
 
-            {props.visibleTypes.includes(MarkerType.MEDIC_POINT) && props.itemSearch.length <= 0 &&
+            {props.visibleTypes.includes(MarkerType.MEDIC_POINT) && !searchingForItem &&
                 data["medic-points"].map((m, i) => (
                     <Marker key={i + 800} position={L.latLng(m.location.x, m.location.y)} icon={medicIcon}
                             eventHandlers={{click: () => props.setChosenMarker(null)}}/>
                 ))
             }
 
-            {(props.visibleTypes.includes(MarkerType.EQUIP_SHOP) || props.itemSearch.length > 0) &&
+            {(props.visibleTypes.includes(MarkerType.EQUIP_SHOP) || searchingForItem) &&
                 data["equip-shops"].map((m, i) => {
-                    if (hasItem(m.items!) || hasItem(m.furnitures!) || hasItem(m.equipments!) || props.itemSearch.length <= 0) {
+                    if (hasItem(m.items!) || hasItem(m.furnitures!) || hasItem(m.equipments!) || !searchingForItem) {
                         return (
                             <Marker key={i + 900} position={L.latLng(m.location.x, m.location.y)} icon={furnitureIcon}
                                     eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Shop} from "@/pojos/data";
 import TextIconBoolean from "@/app/components/TextIconBoolean";
 import ToggleButtonGroup from './ToggleButtonGroup';
@@ -8,11 +8,18 @@ import EquipItem from "@/app/components/EquipItem";
 
 interface Props {
     obj: Shop,
-    itemSearch: string,
+    searchedItems: string[],
 }
 
 function ShopDrawer(props: Props) {
     const [level, setLevel] = useState<number>(0)
+
+    function isSearched(itemName: string) {
+        if (props.searchedItems === undefined) return false
+        const lastIndex = props.searchedItems.length-1
+        return props.searchedItems.includes(itemName)
+        || (itemName.toLowerCase().includes(props.searchedItems[lastIndex].toLowerCase()) && props.searchedItems[lastIndex].length > 0)
+    }
 
     return (
         <div>
@@ -29,18 +36,15 @@ function ShopDrawer(props: Props) {
             ))}
 
             {props.obj.items && props.obj.items.map((item, i) => (
-                <ShopItem item={item} key={i} level={level}
-                          searched={item.name.toLowerCase().includes(props.itemSearch.toLowerCase()) && props.itemSearch.length > 0}/>
+                <ShopItem item={item} key={i} level={level} searched={isSearched(item.name)}/>
             ))}
 
             {props.obj.furnitures && props.obj.furnitures.map((item, i) => (
-                <FurnitureItem item={item} key={i} level={level}
-                          searched={item.name.toLowerCase().includes(props.itemSearch.toLowerCase()) && props.itemSearch.length > 0}/>
+                <FurnitureItem item={item} key={i} level={level} searched={isSearched(item.name)}/>
             ))}
 
             {props.obj.equipments && props.obj.equipments.map((item, i) => (
-                <EquipItem item={item} key={i} level={level}
-                          searched={item.name.toLowerCase().includes(props.itemSearch.toLowerCase()) && props.itemSearch.length > 0}/>
+                <EquipItem item={item} key={i} level={level} searched={isSearched(item.name)}/>
             ))}
         </div>
     );

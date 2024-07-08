@@ -8,7 +8,7 @@ import BossDrawer from "@/app/components/BossDrawer";
 
 interface Props {
     chosenObj: null | Shop | Hideout | Boss | MedicPoint,
-    itemSearch: string,
+    searchedItems: string[],
 }
 
 function MarkerDrawer(props: Props) {
@@ -22,7 +22,7 @@ function MarkerDrawer(props: Props) {
                         <div style={{marginTop: 6}}>
                             {isHideout(props.chosenObj) && <HideoutDrawer obj={props.chosenObj}/>}
                             {isBoss(props.chosenObj) && <BossDrawer obj={props.chosenObj}/>}
-                            {isShop(props.chosenObj) && <ShopDrawer obj={props.chosenObj} itemSearch={props.itemSearch}/>}
+                            {isShop(props.chosenObj) && <ShopDrawer obj={props.chosenObj} searchedItems={props.searchedItems}/>}
                         </div>
                     </div>
                 )}
