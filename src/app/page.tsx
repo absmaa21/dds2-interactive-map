@@ -8,8 +8,10 @@ import MarkerDrawer from "@/app/components/MarkerDrawer";
 import data, {Boss, Hideout, MedicPoint, Shop} from "@/pojos/data";
 import {Style} from "@/pojos/style";
 import IconButton from "@/app/components/IconButton";
-import settingImg from "@/assets/setting.png"
-import discordImg from "@/assets/discord.png"
+// @ts-ignore
+import settingImg from "@/assets/setting.png";
+// @ts-ignore
+import discordImg from "@/assets/discord.png";
 import Modal from "@/app/components/Modal";
 import Settings from "@/app/components/Settings";
 import {discordLink} from "@/pojos/faq"

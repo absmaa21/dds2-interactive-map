@@ -129,7 +129,8 @@ export enum Item {
     GOLD_CHAIN = "Gold chain",
     NECKLACE = "Necklace",
     OPIUM = "Opium",
-    COCS = "Cocaine"
+    COCS = "Cocaine",
+    BLANK_BLOTTER = "Blank blotter",
 }
 
 export enum Unit {

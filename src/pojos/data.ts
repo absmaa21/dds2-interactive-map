@@ -53,6 +53,7 @@ export interface Hideout extends Marker {
 
 export interface Boss extends Marker {
     "demands": DrugDemand[],
+    "xp-level"?: number[], // index eq. level
 }
 
 export interface MedicPoint extends Marker {
@@ -72,6 +73,8 @@ export interface Furniture extends IItem {
     "blocks-grenades"?: boolean,
     "substance-storage"?: number,
     "hideout-stash"?: number,
+    slots?: number,
+    decoration?: boolean,
 }
 
 export interface Equipment extends Furniture {
@@ -85,8 +88,8 @@ export interface Equipment extends Furniture {
 const data: Data
     = {
     "last-update": 1720368559454,
-    "version": 5,
-    "game-version": "1.0.5",
+    "version": 6,
+    "game-version": "1.0.13",
     "hideouts": [
         // Small Island
         {
@@ -621,6 +624,13 @@ const data: Data
                     "unit": Unit.MASS,
                     "quantity": [0,1,1],
                 },
+                {
+                    "name": Item.BLANK_BLOTTER,
+                    "price": 425,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0,0,200],
+                },
             ]
         },
         // Archipelago
@@ -781,85 +791,92 @@ const data: Data
                     "price": 1,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [100, 200, 300]
+                    "quantity": [100, 200, 300, 400]
                 },
                 {
                     "name": Item.FERTILIZER,
                     "price": 1750,
                     "amount": 1000,
                     "unit": Unit.MASS,
-                    "quantity": [2, 2, 3]
+                    "quantity": [2, 2, 3, 3]
                 },
                 {
                     "name": Item.ROLLING_PAPERS,
                     "price": 8,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [40, 60, 80]
+                    "quantity": [40, 60, 80, 100]
                 },
                 {
                     "name": Item.SEED_INDICA,
                     "price": 3000,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [5, 7, 12]
+                    "quantity": [5, 7, 12, 15]
                 },
                 {
                     "name": Item.WEED_INDICA,
                     "price": 9000,
                     "amount": 10,
                     "unit": Unit.MASS,
-                    "quantity": [1, 2, 3]
+                    "quantity": [1, 2, 3, 4]
                 },
                 {
                     "name": Item.UV_BULB_LARGE,
                     "price": 9400,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [1, 2, 2]
+                    "quantity": [1, 2, 3, 3]
                 },
                 {
                     "name": Item.HYDROPONIC_ELEMENTS,
                     "price": 9000,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [1, 2, 2]
+                    "quantity": [1, 2, 2, 3]
                 },
                 {
                     "name": Item.FLOWER_POT,
                     "price": 2000,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [1, 2, 2]
+                    "quantity": [1, 2, 2, 3]
                 },
                 {
                     "name": Item.EMPTY_GLASS_PIPE,
                     "price": 5,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [10, 20, 30]
+                    "quantity": [10, 20, 30, 40]
                 },
                 {
                     "name": Item.VIAL,
                     "price": 2,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [10, 20, 30]
+                    "quantity": [10, 20, 30, 40]
                 },
                 {
                     "name": Item.LED_BULB_SMALL,
                     "price": 3700,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [0, 1, 1]
+                    "quantity": [0, 1, 1, 3]
                 },
                 {
                     "name": Item.FAN,
                     "price": 2250,
                     "amount": 1,
                     "unit": Unit.ITEM,
-                    "quantity": [0, 2, 3]
-                }
+                    "quantity": [0, 2, 3, 5]
+                },
+                {
+                    "name": Item.BLANK_BLOTTER,
+                    "price": 400,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0, 0, 0, 10]
+                },
             ]
         },
         {
@@ -3658,6 +3675,416 @@ const data: Data
     ],
     "equip-shops": [
         {
+            "name": "Elvin Garcia",
+            "area": Area.ARCHI,
+            "check-possible": false,
+            "location": {x: 0.549651, y: 0.939678 },
+            "discounts": [0.0, 0.1, 0.15, 0.2],
+            "furnitures": [
+                {
+                    "name": "Small container",
+                    "price": 300,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [10, -1, -1, 30],
+                    "substance-storage": 750,
+                },
+                {
+                    "name": "Medium container",
+                    "price": 500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5, -1, -1, 13],
+                    "substance-storage": 1500,
+                },
+                {
+                    "name": "Large container",
+                    "price": 900,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2, -1, -1, 4],
+                    "substance-storage": 5000,
+                },
+                {
+                    "name": "Laboratory cabinet",
+                    "price": 5000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, -1, -1, 2],
+                    "slots": 8,
+                    "hideout-stash": 1,
+                },
+            ],
+            "equipments": [
+                {
+                    "name": "Laboratory tray",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2, -1, -1, 4],
+                    "tier": 1,
+                    "hideout-stash": 1,
+                    "substance-storage": 150,
+                    "visibility": 0.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Mortar",
+                    "price": 4000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, -1, -1, 3],
+                    "tier": 1,
+                    "visibility": 0.5,
+                    "crafting-speed": 0.4,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Drying Rack",
+                    "price": 7000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, -1, -1, 3],
+                    "tier": 1,
+                    "crafting-speed": 0.8,
+                    "waste-amount": 1.1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Hybrid Dryer",
+                    "price": 46000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2, -1, -1, 4],
+                    "tier": 2,
+                    "visibility": 1,
+                    "crafting-speed": 1.3,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 50,
+                },
+                {
+                    "name": "Growbox",
+                    "price": 32000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, -1, -1, 3],
+                    "tier": 1,
+                    "visibility": 1.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 80,
+                },
+                {
+                    "name": "Rack (for plants)",
+                    "price": 34000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, -1, -1, 3],
+                    "tier": 2,
+                    "visibility": 1.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                    "energy-usage": 150,
+                },
+                {
+                    "name": "Seedling box",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0, 0, -1, 2],
+                    "tier": 2,
+                    "visibility": 0.5,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Kitchen stove with oven",
+                    "price": 20000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0, 0, -1, 2],
+                    "tier": 1,
+                    "visibility": 1,
+                    "crafting-speed": 0.7,
+                    "waste-amount": 1.2,
+                    "production-cost": 1,
+                    "energy-usage": 2500,
+                },
+                {
+                    "name": "Electric pressure cooker",
+                    "price": 11000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [0, 0, -1, 2],
+                    "tier": 2,
+                    "visibility": 1,
+                    "crafting-speed": 1.15,
+                    "waste-amount": 0.95,
+                    "production-cost": 1,
+                    "energy-usage": 2000,
+                },
+                {
+                    "name": "Small fermentation vat",
+                    "price": 11000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, -1, -1, 2],
+                    "tier": 2,
+                    "visibility": 1,
+                    "crafting-speed": 1,
+                    "waste-amount": 1,
+                    "production-cost": 1,
+                },
+                {
+                    "name": "Bucket",
+                    "price": 2000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1, -1, -1, 2],
+                    "tier": 1,
+                    "visibility": 0.5,
+                    "crafting-speed": 0.5,
+                    "waste-amount": 1.1,
+                    "production-cost": 1,
+                },
+            ],
+        },
+        {
+            "name": "Watto",
+            "area": Area.ARCHI,
+            "check-possible": true,
+            "location": {x: 0.460391, y: 0.797539},
+            "discounts": [0.0, 0.1],
+            "furnitures": [
+                {
+                    "name": "Shelf",
+                    "price": 2000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                    "hideout-stash": 1,
+                    "substance-storage": 500,
+                },
+                {
+                    "name": "Chair",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [6],
+                    "comfort": 1,
+                },
+                {
+                    "name": "Armchair",
+                    "price": 7000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                    "comfort": 2,
+                },
+                {
+                    "name": "Sofa",
+                    "price": 12000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                    "comfort": 3,
+                },
+                {
+                    "name": "Bed",
+                    "price": 8000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                    "comfort": 1,
+                },
+                {
+                    "name": "Double Bed",
+                    "price": 16000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "comfort": 2,
+                },
+                {
+                    "name": "Wardrobe (for clothes)",
+                    "price": 10000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "slots": 30,
+                    "hideout-stash": 1,
+                },
+                {
+                    "name": "Backpack Hanger",
+                    "price": 4000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Desk",
+                    "price": 5500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Table",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                },
+                {
+                    "name": "Industrial Table",
+                    "price": 7000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Cabinet",
+                    "price": 4500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                    "slots": 10,
+                    "hideout-stash": 1,
+                },
+                {
+                    "name": "Metal Cabinet",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "slots": 15,
+                },
+                {
+                    "name": "Dresser",
+                    "price": 9000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "slots": 25,
+                    "hideout-stash": 2,
+                },
+                {
+                    "name": "Bookshelf",
+                    "price": 5000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                    "hideout-stash": 5,
+                    "substance-storage": 1500,
+                },
+                {
+                    "name": "Retro radio",
+                    "price": 11000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Pet bed",
+                    "price": 5000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [2],
+                },
+                {
+                    "name": "Small safe",
+                    "price": 32000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                },
+                {
+                    "name": "Door lock",
+                    "price": 6000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [1],
+                    "security": 7,
+                },
+                {
+                    "name": "Ceiling Lamp",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [6],
+                    "comfort": 1,
+                },
+                {
+                    "name": "Desk lamp",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [6],
+                    "comfort": 1,
+                },
+                {
+                    "name": "Floor lamp",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [6],
+                    "comfort": 1,
+                },
+                {
+                    "name": "Painting",
+                    "price": 4000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [6],
+                    "comfort": 1,
+                    "decoration": true,
+                },
+                {
+                    "name": "Potted plant",
+                    "price": 3000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [5],
+                    "comfort": 2,
+                    "decoration": true,
+                },
+                {
+                    "name": "Cactus sculpture (dot)",
+                    "price": 2000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                    "comfort": 1,
+                    "decoration": true,
+                },
+                {
+                    "name": "Cactus sculpture (long)",
+                    "price": 2000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                    "comfort": 1,
+                    "decoration": true,
+                },
+                {
+                    "name": "Cactus sculpture (long+dot)",
+                    "price": 2000,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
+                    "quantity": [3],
+                    "comfort": 1,
+                    "decoration": true,
+                },
+            ],
+        },
+        {
             "name": "Watto",
             "area": Area.SLAVS_BAY,
             "check-possible": false,
@@ -4568,6 +4995,7 @@ const data: Data
             "name": "Llanzo Jean-Louis",
             "area": Area.ARCHI,
             "location": { x: 0.46966, y: 0.951346 },
+            "xp-level": [0, 250, 550, 1100, 1950], // level 3 not sure
             "demands": [
                 {
                     "name": "Marijuana",
@@ -4590,6 +5018,7 @@ const data: Data
             "name": "Pedro Alvarez",
             "area": Area.CALLEJON,
             "location": { x: 0.561667, y: 0.69935 },
+            "xp-level": [200, 700], // level 1 unsure
             "demands": [
                 {
                     "name": "Marijuana",
