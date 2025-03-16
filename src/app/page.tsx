@@ -17,19 +17,10 @@ import Settings from "@/app/components/Settings";
 import {discordLink} from "@/pojos/faq"
 import AutocompleteInput from "@/app/components/AutocompleteInput";
 
-const defaultVisibleMarkers = [
+const defaultVisibleMarkers: MarkerType[] = [
     MarkerType.PAWN_SHOP,
-    MarkerType.HIDEOUT,
-    MarkerType.BOAT_DOCK,
-    MarkerType.DEAD_DROP,
     MarkerType.DEALER_SPOT,
     MarkerType.EQUIP_SHOP,
-    MarkerType.RESTAURANT,
-    MarkerType.ZONES,
-    MarkerType.SHOP,
-    MarkerType.MEDIC_POINT,
-    MarkerType.BOSS,
-    MarkerType.CLOTH_SHOP,
 ]
 
 export default function Home() {
@@ -40,7 +31,7 @@ export default function Home() {
         }
     ), [])
 
-    const [visibleTypes, setVisibleTypes] = useState(defaultVisibleMarkers);
+    const [visibleTypes, setVisibleTypes] = useState<MarkerType[]>(defaultVisibleMarkers);
     const toggleType = (type: MarkerType) => {
         setVisibleTypes((prev) =>
             prev.includes(type)
@@ -72,12 +63,14 @@ export default function Home() {
             <div style={drawer}>
                 <div style={buttonContainer}>
                     <h1 style={{textAlign: 'center', fontSize: 26}}>DDS2 Interactive Map</h1>
+
                     <h3>Search item</h3>
                     <AutocompleteInput value={itemSearch} setValue={setItemSearch} suggestionValues={Object.values(Item)}
                                        setSelectedItems={setSelectedItems} handleSubmit={handleSubmit}/>
                     <div style={selectedItemsContainer}>
                         {selectedItems.map(item => <div style={selectedItemStyle} onClick={() => removeItem(item)}>{item}</div>)}
                     </div>
+
                     <h3>Filter markers</h3>
                     <ToggleButton text={'Hideouts'} selected={visibleTypes.includes(MarkerType.HIDEOUT)}
                                   onClick={() => toggleType(MarkerType.HIDEOUT)} amount={data.hideouts.length}/>
@@ -105,6 +98,7 @@ export default function Home() {
                                   onClick={() => toggleType(MarkerType.MEDIC_POINT)}
                                   amount={data["medic-points"].length}/>
                 </div>
+
                 <div style={{display: 'flex', gap: 8}}>
                     <IconButton opacity={.33} src={settingImg.src} onClick={toggleModal}/>
                     <IconButton opacity={.33} src={discordImg.src} onClick={() => window.open(discordLink, "_blank")}/>

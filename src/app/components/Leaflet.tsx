@@ -6,17 +6,26 @@ import 'leaflet/dist/leaflet.css';
 import DraggableMarker from "@/app/components/DraggableMarker";
 import data, {IItem} from "@/pojos/data";
 import {MarkerType} from "@/pojos/enums";
-import shopImg from "../../assets/store-marker.png"
+// @ts-ignore
+import shopImg from "../../assets/store_marker.png"
+// @ts-ignore
 import hideoutImg from "../../assets/hideout-marker.png"
+// @ts-ignore
 import pawnshopImg from "../../assets/pawn-shop-marker.png"
+// @ts-ignore
 import medicImg from "../../assets/medic-marker.png"
+// @ts-ignore
 import anchorImg from "../../assets/anchor-marker.png"
+// @ts-ignore
 import heartImg from "../../assets/heart-marker.png"
+// @ts-ignore
 import restaurantImg from "../../assets/restaurant-marker.png"
+// @ts-ignore
 import clothImg from "../../assets/shirt-marker.png"
+// @ts-ignore
 import furnitureImg from "../../assets/furniture-marker.png"
+// @ts-ignore
 import dealerImg from "../../assets/dealer-marker.png"
-import useDebouncedState from "@restart/hooks/useDebouncedState";
 
 const size = 0.3
 
@@ -140,7 +149,7 @@ function Leaflet(props: Leaflet) {
             <DraggableMarker/>
             {(props.visibleTypes.includes(MarkerType.SHOP) || searchingForItem) &&
                 data.shops.map((m, i) => {
-                    if (hasItem(m.items!) || !searchingForItem) {
+                    if (!searchingForItem || hasItem(m.items!) || hasItem(m.furnitures!) || hasItem(m.equipments!)) {
                         return (
                             <Marker key={i} position={L.latLng(m.location.x, m.location.y)} icon={shopIcon}
                                     eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
@@ -159,7 +168,7 @@ function Leaflet(props: Leaflet) {
 
             {(props.visibleTypes.includes(MarkerType.PAWN_SHOP) || searchingForItem) &&
                 data["pawn-shops"].map((m, i) => {
-                    if (hasItem(m.items!) || !searchingForItem) {
+                    if (!searchingForItem || hasItem(m.items!) || hasItem(m.furnitures!) || hasItem(m.equipments!)) {
                         return (
                             <Marker key={i + 200} position={L.latLng(m.location.x, m.location.y)} icon={pawnshopIcon}
                                     eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
@@ -198,7 +207,7 @@ function Leaflet(props: Leaflet) {
 
             {(props.visibleTypes.includes(MarkerType.CLOTH_SHOP) || searchingForItem) &&
                 data["cloth-shops"].map((m, i) => {
-                    if (hasItem(m.items!) || !searchingForItem) {
+                    if (!searchingForItem || hasItem(m.items!) || hasItem(m.furnitures!) || hasItem(m.equipments!)) {
                         return (
                             <Marker key={i + 600} position={L.latLng(m.location.x, m.location.y)} icon={clothIcon}
                                     eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
@@ -224,7 +233,7 @@ function Leaflet(props: Leaflet) {
 
             {(props.visibleTypes.includes(MarkerType.EQUIP_SHOP) || searchingForItem) &&
                 data["equip-shops"].map((m, i) => {
-                    if (hasItem(m.items!) || hasItem(m.furnitures!) || hasItem(m.equipments!) || !searchingForItem) {
+                    if (!searchingForItem || hasItem(m.items!) || hasItem(m.furnitures!) || hasItem(m.equipments!)) {
                         return (
                             <Marker key={i + 900} position={L.latLng(m.location.x, m.location.y)} icon={furnitureIcon}
                                     eventHandlers={{click: () => props.setChosenMarker(m)}}><Popup>{m.name}</Popup></Marker>
