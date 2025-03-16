@@ -2279,14 +2279,14 @@ const data: Data
             "area": Area.JUNGLE,
             "check-possible": false,
             "location": {x: 0.600117, y: 0.64785 },
-            "discounts": [0.0, 0.05],
+            "discounts": [0.0, 0.05, 0.1],
             "items": [
                 {
                     "name": Item.METH,
                     "price": 18000,
                     "amount": 10,
                     "unit": Unit.MASS,
-                    "quantity": [1],
+                    "quantity": [1,2],
                 },
                 {
                     "name": Item.EPHEDRINE,
@@ -2307,6 +2307,12 @@ const data: Data
                     "price": 480,
                     "amount": 200,
                     "unit": Unit.LIQUID,
+                    "quantity": [10],
+                },  {
+                    "name": Item.BLANK_BLOTTER,
+                    "price": 500,
+                    "amount": 1,
+                    "unit": Unit.ITEM,
                     "quantity": [10],
                 },
                 {
