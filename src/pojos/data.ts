@@ -5026,18 +5026,18 @@ const data: Data
             "xp-level": [0, 250, 550, 1100, 1950], // level 3 not sure
             "demands": [
                 {
-                    "name": "Marijuana",
-                    "amount": 125,
+                    "name": Item.WEED_INDICA,
+                    "amount": 250,
                     "price-per-g": 1900,
                 },
                 {
                     "name": Item.AMP,
-                    "amount": 75,
+                    "amount": 75, // probably *2
                     "price-per-g": 2500,
                 },
                 {
                     "name": Item.METH,
-                    "amount": 50,
+                    "amount": 50, // probably *2
                     "price-per-g": 3000,
                 },
             ],
@@ -5046,26 +5046,26 @@ const data: Data
             "name": "Pedro Alvarez",
             "area": Area.CALLEJON,
             "location": { x: 0.561667, y: 0.69935 },
-            "xp-level": [200, 700], // level 1 unsure
+            "xp-level": [200, 700, -1, 2600], // level 1 unsure
             "demands": [
                 {
-                    "name": "Marijuana",
-                    "amount": 125,
+                    "name": Item.WEED_INDICA,
+                    "amount": 250,
                     "price-per-g": 1500,
                 },
                 {
                     "name": Item.AMP,
-                    "amount": 150,
+                    "amount": 300,
                     "price-per-g": 2000,
                 },
                 {
                     "name": Item.METH,
-                    "amount": 75,
+                    "amount": 75, // probably *2
                     "price-per-g": 3000,
                 },
                 {
-                    "name": "Opium",
-                    "amount": 50,
+                    "name": Item.OPIUM,
+                    "amount": 50, // probably *2
                     "price-per-g": 2200,
                 },
             ],
@@ -5076,7 +5076,7 @@ const data: Data
             "location": { x: 0.595483, y: 0.650768 },
             "demands": [
                 {
-                    "name": "Marijuana",
+                    "name": Item.WEED_INDICA,
                     "amount": 50,
                     "price-per-g": 2000,
                 },
@@ -5091,7 +5091,7 @@ const data: Data
                     "price-per-g": 3000,
                 },
                 {
-                    "name": "Opium",
+                    "name": Item.OPIUM,
                     "amount": 50,
                     "price-per-g": 2200,
                 },
@@ -5103,7 +5103,7 @@ const data: Data
             "location": { x: 0.417992, y: 0.539531 },
             "demands": [
                 {
-                    "name": "Marijuana",
+                    "name": Item.WEED_INDICA,
                     "amount": 175,
                     "price-per-g": 1500,
                 },
@@ -5130,7 +5130,7 @@ const data: Data
             "location": { x: 0.376279, y: 0.201005 },
             "demands": [
                 {
-                    "name": "Marijuana",
+                    "name": Item.WEED_INDICA,
                     "amount": 100,
                     "price-per-g": 2700,
                 },
