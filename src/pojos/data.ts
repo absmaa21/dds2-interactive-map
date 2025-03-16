@@ -1861,7 +1861,7 @@ const data: Data
                 },
                 {
                     "name": Item.ERGOT_RYE,
-                    "price": 1800,
+                    "price": 1600,
                     "amount": 1,
                     "unit": Unit.ITEM,
                     "quantity": [50],
@@ -1920,7 +1920,7 @@ const data: Data
                 {
                     "name": Item.FERTILIZER_SYNTHETIC,
                     "price": 1200,
-                    "amount": 300,
+                    "amount": 3000,
                     "unit": Unit.MASS,
                     "quantity": [3, 5, 9],
                 },
