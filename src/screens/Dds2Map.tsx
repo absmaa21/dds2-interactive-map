@@ -1,5 +1,5 @@
 import './Dds2Map.css'
-import {lazy, Suspense} from "react";
+import {lazy, Suspense, useEffect} from "react";
 import Loading from "../components/Loading.tsx";
 import MapDrawer from "../components/dds2-map/MapDrawer.tsx"
 import MarkerDrawer from "../components/dds2-map/MarkerDrawer.tsx";
@@ -12,6 +12,10 @@ function Dds2Map() {
 
   const MapData = useMapData()
   const mapDrawerWidth: number = 280
+
+  useEffect(() => {
+    document.title = 'DDS2 Interactive Map'
+  }, []);
 
   return (
     <div className={'container'}>
